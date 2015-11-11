@@ -1,1 +1,11 @@
 C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\AddonTemplate\AddonTemplate\bin\Debug\AddonTemplate.exe.config
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\AddonTemplate\AddonTemplate\bin\Debug\AddonTemplate.exe
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\AddonTemplate\AddonTemplate\bin\Debug\AddonTemplate.pdb
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\AddonTemplate\AddonTemplate\bin\Debug\EloBuddy.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\AddonTemplate\AddonTemplate\bin\Debug\EloBuddy.SDK.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\AddonTemplate\AddonTemplate\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\AddonTemplate\AddonTemplate\bin\Debug\SharpDX.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\AddonTemplate\AddonTemplate\bin\Debug\Newtonsoft.Json.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\AddonTemplate\AddonTemplate\obj\Debug\AddonTemplate.csprojResolveAssemblyReference.cache
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\AddonTemplate\AddonTemplate\obj\Debug\AddonTemplate.exe
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\AddonTemplate\AddonTemplate\obj\Debug\AddonTemplate.pdb

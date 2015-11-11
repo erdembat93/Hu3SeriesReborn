@@ -1,0 +1,12 @@
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\YasuoHu3 Rebon\YasuoHu3Reborn\bin\Debug\AddonTemplate.exe.config
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\YasuoHu3 Reborn\YasuoHu3Reborn\bin\Debug\YasuoHu3Reborn.exe.config
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\YasuoHu3 Reborn\YasuoHu3Reborn\obj\Debug\YasuoHu3Reborn.csprojResolveAssemblyReference.cache
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\YasuoHu3 Reborn\YasuoHu3Reborn\bin\Debug\YasuoHu3Reborn.exe
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\YasuoHu3 Reborn\YasuoHu3Reborn\bin\Debug\YasuoHu3Reborn.pdb
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\YasuoHu3 Reborn\YasuoHu3Reborn\bin\Debug\EloBuddy.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\YasuoHu3 Reborn\YasuoHu3Reborn\bin\Debug\EloBuddy.SDK.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\YasuoHu3 Reborn\YasuoHu3Reborn\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\YasuoHu3 Reborn\YasuoHu3Reborn\bin\Debug\SharpDX.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\YasuoHu3 Reborn\YasuoHu3Reborn\bin\Debug\Newtonsoft.Json.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\YasuoHu3 Reborn\YasuoHu3Reborn\obj\Debug\YasuoHu3Reborn.exe
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\YasuoHu3 Reborn\YasuoHu3Reborn\obj\Debug\YasuoHu3Reborn.pdb
