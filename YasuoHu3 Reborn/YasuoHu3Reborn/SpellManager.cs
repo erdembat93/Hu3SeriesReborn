@@ -15,7 +15,7 @@ namespace YasuoHu3Reborn
         static SpellManager()
         {
             W = new Spell.Skillshot(SpellSlot.W, 400,SkillShotType.Linear, 400, int.MaxValue);
-            E = new Spell.Targeted(SpellSlot.E, 470);
+            E = new Spell.Targeted(SpellSlot.E, 475);
             R = new Spell.Targeted(SpellSlot.R, 1200);
         }
 
@@ -26,7 +26,7 @@ namespace YasuoHu3Reborn
 
         private static void Game_OnTick(EventArgs args)
         {
-            Q = new Spell.Skillshot(SpellSlot.Q, Player.Instance.HasQ3() ? (uint) 470 : 1070, SkillShotType.Linear,
+            Q = new Spell.Skillshot(SpellSlot.Q, Player.Instance.HasQ3() ? (uint) 1070 : 470, SkillShotType.Linear,
                 Player.Instance.HasQ3() ? (int) GetQDelay : (int) GetQ2Delay, int.MaxValue, 65);
         }
 

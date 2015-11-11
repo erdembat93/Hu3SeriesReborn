@@ -109,7 +109,7 @@ namespace YasuoHu3Reborn
                     _useEGap = ModesMenu.Add("comboGapE", new CheckBox("Use E to GapCloser"));
                     _useR = ModesMenu.Add("comboR", new CheckBox("Use R"));
                     _minR = ModesMenu.Add("minR", new Slider("Min enemies to use R", 2, 0, 5));
-                    _delayR = ModesMenu.Add("delayR", new Slider("Delay R", 100, 0, 500));
+                    _delayR = ModesMenu.Add("delayR", new Slider("Delay R", 100, 0, 300));
                 }
 
                 public static void Initialize()
@@ -141,11 +141,17 @@ namespace YasuoHu3Reborn
             public static class LaneClear
             {
                 private static readonly CheckBox _useQ;
+                private static readonly CheckBox _useQ3;
                 private static readonly CheckBox _useE;
 
                 public static bool UseQ
                 {
                     get { return _useQ.CurrentValue; }
+                }
+
+                public static bool UseQ3
+                {
+                    get { return _useQ3.CurrentValue; }
                 }
 
                 public static bool UseE
@@ -159,6 +165,7 @@ namespace YasuoHu3Reborn
                     // Initialize the menu values
                     ModesMenu.AddGroupLabel("LaneClear");
                     _useQ = ModesMenu.Add("laneQ", new CheckBox("Use Q"));
+                    _useQ3 = ModesMenu.Add("laneQ3", new CheckBox("Use Q3"));
                     _useE = ModesMenu.Add("laneE", new CheckBox("Use E"));
                 }
 
@@ -170,11 +177,17 @@ namespace YasuoHu3Reborn
             public static class LastHit
             {
                 private static readonly CheckBox _useQ;
+                private static readonly CheckBox _useQ3;
                 private static readonly CheckBox _useE;
 
                 public static bool UseQ
                 {
                     get { return _useQ.CurrentValue; }
+                }
+
+                public static bool UseQ3
+                {
+                    get { return _useQ3.CurrentValue; }
                 }
 
                 public static bool UseE
@@ -187,6 +200,7 @@ namespace YasuoHu3Reborn
                     // Initialize the menu values
                     ModesMenu.AddGroupLabel("LastHit");
                     _useQ = ModesMenu.Add("lastQ", new CheckBox("Use Q"));
+                    _useQ3 = ModesMenu.Add("lastQ3", new CheckBox("Use Q3"));
                     _useE = ModesMenu.Add("lastE", new CheckBox("Use E"));
                 }
 

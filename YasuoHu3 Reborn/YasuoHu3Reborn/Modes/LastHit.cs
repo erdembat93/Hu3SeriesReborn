@@ -1,5 +1,8 @@
-﻿using EloBuddy;
+﻿using System.Linq;
+using EloBuddy;
 using EloBuddy.SDK;
+
+using Settings = YasuoHu3Reborn.Config.Modes.LastHit;
 
 namespace YasuoHu3Reborn.Modes
 {
@@ -12,15 +15,44 @@ namespace YasuoHu3Reborn.Modes
 
         public override void Execute()
         {
-            // TODO: Add lasthit logic here
-            //if (Q.IsReady())
-            //{
-            //    var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
-            //    if (target != null)
-            //    {
-            //        Q.Cast(target);
-            //    }
-            //}
+            if (Settings.UseE && SpellManager.E.IsReady())
+            {
+                var minionE =
+                    EntityManager.MinionsAndMonsters.EnemyMinions
+                        .FirstOrDefault(m => m.IsEnemy && m.IsValidTarget(SpellManager.E.Range)
+                                             && (m.Health <= SpellDamage.EDamage(m)));
+
+                if (minionE != null && !minionE.GetAfterEPos().Tower())
+                {
+                    SpellManager.E.Cast(minionE);
+                }
+            }
+
+            if (Settings.UseQ && SpellManager.Q.IsReady() && !Player.Instance.HasQ3())
+            {
+                var minionQ =
+                    EntityManager.MinionsAndMonsters.EnemyMinions
+                        .FirstOrDefault(m => m.IsEnemy && m.IsValidTarget(SpellManager.Q.Range)
+                                             && m.Health <= SpellDamage.QDamage(m));
+                if (minionQ != null)
+                {
+                    SpellManager.Q.Cast(minionQ);
+                }
+
+            }
+
+            if (Settings.UseQ3 && Player.Instance.HasQ3() && SpellManager.Q.IsReady())
+            {
+                var minionQ3 =
+                    EntityManager.MinionsAndMonsters.EnemyMinions
+                        .FirstOrDefault(m => m.IsEnemy && m.IsValidTarget(SpellManager.Q.Range)
+                                             && m.Health <= SpellDamage.QDamage(m));
+                if (minionQ3 != null)
+                {
+                    SpellManager.Q.Cast(minionQ3);
+                }
+
+            }
         }
     }
 }
