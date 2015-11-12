@@ -20,6 +20,7 @@ namespace YasuoHu3Reborn
                 new PermaActive(),
                 new Combo(),
                 new Harass(),
+                new FastLane(),
                 new LaneClear(),
                 new JungleClear(),
                 new LastHit(),

@@ -1,4 +1,5 @@
-﻿using EloBuddy.SDK.Menu;
+﻿using System.Linq.Expressions;
+using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using Color = System.Drawing.Color;
 
@@ -244,17 +245,25 @@ namespace YasuoHu3Reborn
             public static class Misc
             {
                 private static readonly CheckBox _autoQ;
-
+                private static readonly KeyBind _fastKey;
 
                 public static bool AutoQ
                 {
                     get { return _autoQ.CurrentValue; }
                 }
 
+                public static bool FastLaneKey
+                {
+                    get { return _fastKey.CurrentValue; }
+                }
+
                 static Misc()
                 {
                     // Initialize the menu values
                     ModesMenu.AddGroupLabel("Misc");
+                    _fastKey = ModesMenu.Add("fastKey",
+                        new KeyBind("Key to use fast lane", false, KeyBind.BindTypes.HoldActive, 'Z'));
+                    ModesMenu.AddSeparator();
                     _autoQ = ModesMenu.Add("autoQ", new CheckBox("Use Auto Q"));
                 }
 

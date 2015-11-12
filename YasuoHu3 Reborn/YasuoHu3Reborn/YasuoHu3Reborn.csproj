@@ -78,6 +78,7 @@
     <Compile Include="Evader.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="ModeManager.cs" />
+    <Compile Include="Modes\FastLane.cs" />
     <Compile Include="Modes\PermaActive.cs" />
     <Compile Include="Modes\Flee.cs" />
     <Compile Include="Modes\LaneClear.cs" />
