@@ -2,7 +2,7 @@
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace AddonTemplate
+namespace TristanaHu3Reborn
 {
     public static class WidthMenu
     {

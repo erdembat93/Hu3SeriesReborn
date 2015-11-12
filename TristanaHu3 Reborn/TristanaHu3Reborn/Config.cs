@@ -8,7 +8,7 @@ using Color = System.Drawing.Color;
 // ReSharper disable InconsistentNaming
 // ReSharper disable MemberHidesStaticFromOuterClass
 
-namespace AddonTemplate
+namespace TristanaHu3Reborn
 {
     public static class Config
     {

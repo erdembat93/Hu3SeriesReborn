@@ -2,10 +2,10 @@
 using EloBuddy.SDK;
 
 // Using the config like this makes your life easier, trust me
-using Settings = AddonTemplate.Config.Modes.Combo;
-using Configs = AddonTemplate.Config.Modes.Misc;
+using Settings = TristanaHu3Reborn.Config.Modes.Combo;
+using Configs = TristanaHu3Reborn.Config.Modes.Misc;
 
-namespace AddonTemplate.Modes
+namespace TristanaHu3Reborn.Modes
 {
     public sealed class Combo : ModeBase
     {

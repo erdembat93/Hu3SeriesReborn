@@ -2,7 +2,7 @@
 using EloBuddy.SDK;
 using EloBuddy.SDK.Enumerations;
 
-namespace AddonTemplate
+namespace TristanaHu3Reborn
 {
     public static class SpellManager
     {

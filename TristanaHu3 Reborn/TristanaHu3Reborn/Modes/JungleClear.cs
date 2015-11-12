@@ -2,9 +2,9 @@
 using EloBuddy;
 using EloBuddy.SDK;
 
-using Settings = AddonTemplate.Config.Modes.LaneClear;
+using Settings = TristanaHu3Reborn.Config.Modes.LaneClear;
 
-namespace AddonTemplate.Modes
+namespace TristanaHu3Reborn.Modes
 {
     public sealed class JungleClear : ModeBase
     {

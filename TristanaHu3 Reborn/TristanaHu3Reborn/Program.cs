@@ -6,10 +6,10 @@ using EloBuddy.SDK.Enumerations;
 using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Rendering;
 using Color = System.Drawing.Color;
-using Settings = AddonTemplate.Config.Modes.Draw;
+using Settings = TristanaHu3Reborn.Config.Modes.Draw;
 
 
-namespace AddonTemplate
+namespace TristanaHu3Reborn
 {
     public static class Program
     {

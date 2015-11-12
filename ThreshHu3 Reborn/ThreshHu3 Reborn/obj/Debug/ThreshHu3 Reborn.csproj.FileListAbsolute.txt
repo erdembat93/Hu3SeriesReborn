@@ -1,0 +1,11 @@
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\ThreshHu3 Reborn\ThreshHu3 Reborn\bin\Debug\TreshHu3Reborn.exe.config
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\ThreshHu3 Reborn\ThreshHu3 Reborn\obj\Debug\ThreshHu3 Reborn.csprojResolveAssemblyReference.cache
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\ThreshHu3 Reborn\ThreshHu3 Reborn\bin\Debug\TreshHu3Reborn.exe
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\ThreshHu3 Reborn\ThreshHu3 Reborn\bin\Debug\TreshHu3Reborn.pdb
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\ThreshHu3 Reborn\ThreshHu3 Reborn\bin\Debug\EloBuddy.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\ThreshHu3 Reborn\ThreshHu3 Reborn\bin\Debug\EloBuddy.SDK.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\ThreshHu3 Reborn\ThreshHu3 Reborn\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\ThreshHu3 Reborn\ThreshHu3 Reborn\bin\Debug\SharpDX.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\ThreshHu3 Reborn\ThreshHu3 Reborn\bin\Debug\Newtonsoft.Json.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\ThreshHu3 Reborn\ThreshHu3 Reborn\obj\Debug\TreshHu3Reborn.exe
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\ThreshHu3 Reborn\ThreshHu3 Reborn\obj\Debug\TreshHu3Reborn.pdb

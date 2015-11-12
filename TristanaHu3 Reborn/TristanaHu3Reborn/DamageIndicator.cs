@@ -4,9 +4,9 @@ using EloBuddy;
 using EloBuddy.SDK;
 using SharpDX;
 using Color = System.Drawing.Color;
-using Settings = AddonTemplate.Config.Modes.Draw;
+using Settings = TristanaHu3Reborn.Config.Modes.Draw;
 
-namespace AddonTemplate
+namespace TristanaHu3Reborn
 {
     public static class DamageIndicator
     {

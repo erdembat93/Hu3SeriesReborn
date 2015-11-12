@@ -1,8 +1,8 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
-using Settings = AddonTemplate.Config.Modes.Harass;
+using Settings = TristanaHu3Reborn.Config.Modes.Harass;
 
-namespace AddonTemplate.Modes
+namespace TristanaHu3Reborn.Modes
 {
     public sealed class Harass : ModeBase
     {
