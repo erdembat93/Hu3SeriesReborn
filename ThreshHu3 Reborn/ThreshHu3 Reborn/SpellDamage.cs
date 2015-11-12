@@ -60,7 +60,7 @@ namespace TreshHu3Reborn
             {
                 case SpellSlot.Q:
 
-                    damage = new float[] { 0, 0, 0, 0, 0 }[spellLevel] + 0.0f * Player.Instance.TotalMagicalDamage;
+                    damage = new float[] { 80, 120, 160, 200, 240 }[spellLevel] + 0.5f * Player.Instance.TotalMagicalDamage;
                     break;
 
                 case SpellSlot.W:
@@ -70,12 +70,12 @@ namespace TreshHu3Reborn
 
                 case SpellSlot.E:
 
-                    damage = new float[] { 0, 0, 0, 0, 0 }[spellLevel] + 0.0f * Player.Instance.TotalMagicalDamage;
+                    damage = new float[] { 65, 95, 125, 155, 185 }[spellLevel] + 0.4f * Player.Instance.TotalMagicalDamage;
                     break;
 
                 case SpellSlot.R:
 
-                    damage = new float[] { 0, 0, 0 }[spellLevel] + 0.0f * Player.Instance.TotalMagicalDamage;
+                    damage = new float[] { 250, 400, 550 }[spellLevel] + 1.0f * Player.Instance.TotalMagicalDamage;
                     break;
             }
 

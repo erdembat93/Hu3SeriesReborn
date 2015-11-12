@@ -11,7 +11,7 @@ namespace TreshHu3Reborn
 {
     public static class Config
     {
-        private const string MenuName = "AddonTemplate";
+        private const string MenuName = "ThreshHu3 Reborn";
 
         private static readonly Menu Menu;
 
@@ -19,7 +19,7 @@ namespace TreshHu3Reborn
         {
             // Initialize the menu
             Menu = MainMenu.AddMenu(MenuName, MenuName.ToLower());
-            Menu.AddGroupLabel("AddonTemplate");
+            Menu.AddGroupLabel("ThreshHu3 Reborn");
             Menu.AddLabel("Made By: MarioGK", 50);
 
             // Initialize the modes
@@ -59,7 +59,9 @@ namespace TreshHu3Reborn
                 private static readonly CheckBox _useQ;
                 private static readonly CheckBox _useW;
                 private static readonly CheckBox _useE;
+                private static readonly Slider _modeE;
                 private static readonly CheckBox _useR;
+                private static readonly Slider _minR;
 
                 public static bool UseQ
                 {
@@ -76,9 +78,19 @@ namespace TreshHu3Reborn
                     get { return _useE.CurrentValue; }
                 }
 
+                public static int ModeE
+                {
+                    get { return _modeE.CurrentValue; }
+                }
+
                 public static bool UseR
                 {
                     get { return _useR.CurrentValue; }
+                }
+
+                public static int MinR
+                {
+                    get { return _minR.CurrentValue; }
                 }
 
                 static Combo()
@@ -88,7 +100,10 @@ namespace TreshHu3Reborn
                     _useQ = ModesMenu.Add("comboQ", new CheckBox("Use Q"));
                     _useW = ModesMenu.Add("comboW", new CheckBox("Use W"));
                     _useE = ModesMenu.Add("comboE", new CheckBox("Use E"));
-                    _useR = ModesMenu.Add("comboR", new CheckBox("Use R", false)); // Default false
+                    _modeE = ModesMenu.Add("modeE", new Slider("Which E to use", 1,0,1));
+                    ModesMenu.AddLabel("If the slider is 0 it will push,If it is 1 it will pull");
+                    _useR = ModesMenu.Add("comboR", new CheckBox("Use R"));
+                    _minR = ModesMenu.Add("minR", new Slider("Which E to use", 2, 1, 5));
                 }
 
                 public static void Initialize()

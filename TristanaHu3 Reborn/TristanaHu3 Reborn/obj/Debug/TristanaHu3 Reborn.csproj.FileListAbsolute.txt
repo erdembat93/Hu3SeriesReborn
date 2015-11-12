@@ -1,0 +1,3 @@
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\TristanaHu3 Reborn\TristanaHu3 Reborn\bin\Debug\TristanaHu3Reborn.exe.config
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\TristanaHu3 Reborn\TristanaHu3 Reborn\obj\Debug\TristanaHu3Reborn.exe
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\TristanaHu3 Reborn\TristanaHu3 Reborn\obj\Debug\TristanaHu3Reborn.pdb

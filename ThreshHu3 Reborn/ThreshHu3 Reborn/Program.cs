@@ -11,7 +11,7 @@ namespace TreshHu3Reborn
     public static class Program
     {
         // ReSharper disable once MemberCanBePrivate.Global
-        public const string ChampName = "Caitlyn";
+        public const string ChampName = "Thresh";
 
         public static void Main(string[] args)
         {

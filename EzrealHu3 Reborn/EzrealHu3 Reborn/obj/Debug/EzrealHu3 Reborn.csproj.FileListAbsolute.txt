@@ -1,0 +1,3 @@
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\EzrealHu3 Reborn\EzrealHu3 Reborn\bin\Debug\EzrealHu3 2.0.exe.config
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\EzrealHu3 Reborn\EzrealHu3 Reborn\obj\Debug\EzrealHu3 2.0.exe
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\EzrealHu3 Reborn\EzrealHu3 Reborn\obj\Debug\EzrealHu3 2.0.pdb
