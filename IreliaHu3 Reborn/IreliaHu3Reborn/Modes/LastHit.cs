@@ -1,5 +1,8 @@
-﻿using EloBuddy;
+﻿using System.Linq;
+using EloBuddy;
 using EloBuddy.SDK;
+
+using Settings = AddonTemplate.Config.Modes.LastHit;
 
 namespace AddonTemplate.Modes
 {
@@ -12,15 +15,17 @@ namespace AddonTemplate.Modes
 
         public override void Execute()
         {
-            // TODO: Add lasthit logic here
-            //if (Q.IsReady())
-            //{
-            //    var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
-            //    if (target != null)
-            //    {
-            //        Q.Cast(target);
-            //    }
-            //}
+            if (Q.IsReady() && Settings.UseQ)
+            {
+                var minionq =
+                    EntityManager.MinionsAndMonsters.EnemyMinions.FirstOrDefault(
+                        m => m.IsValidTarget(Q.Range) && m.Health < SpellDamage.GetRealDamage(SpellSlot.Q, m));
+
+                if (minionq != null)
+                {
+                    Q.Cast(minionq);
+                }
+            }
         }
     }
 }

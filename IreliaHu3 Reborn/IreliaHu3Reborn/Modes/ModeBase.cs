@@ -4,7 +4,7 @@ namespace AddonTemplate.Modes
 {
     public abstract class ModeBase
     {
-        protected Spell.Active Q
+        protected Spell.Targeted Q
         {
             get { return SpellManager.Q; }
         }
@@ -12,11 +12,11 @@ namespace AddonTemplate.Modes
         {
             get { return SpellManager.W; }
         }
-        protected Spell.Active E
+        protected Spell.Targeted E
         {
             get { return SpellManager.E; }
         }
-        protected Spell.Targeted R
+        protected Spell.Skillshot R
         {
             get { return SpellManager.R; }
         }

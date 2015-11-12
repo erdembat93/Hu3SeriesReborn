@@ -1,4 +1,6 @@
-﻿using EloBuddy.SDK;
+﻿using System.Linq;
+using EloBuddy;
+using EloBuddy.SDK;
 
 namespace AddonTemplate.Modes
 {
@@ -11,7 +13,12 @@ namespace AddonTemplate.Modes
 
         public override void Execute()
         {
-            // TODO: Add flee logic here
+            var minion = EntityManager.MinionsAndMonsters.Minions.OrderBy(x => x.Distance(Game.CursorPos)).FirstOrDefault(m => m.IsEnemy && m.IsValidTarget(Q.Range));
+
+            if (minion != null)
+            {
+                Q.Cast(minion);
+            }
         }
     }
 }

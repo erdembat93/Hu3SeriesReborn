@@ -1,4 +1,8 @@
-﻿using EloBuddy.SDK;
+﻿using System.Linq;
+using EloBuddy;
+using EloBuddy.SDK;
+
+using Settings = AddonTemplate.Config.Modes.LaneClear;
 
 namespace AddonTemplate.Modes
 {
@@ -11,7 +15,29 @@ namespace AddonTemplate.Modes
 
         public override void Execute()
         {
-            // TODO: Add laneclear logic here
+            if (Q.IsReady() && Settings.UseQ)
+            {
+                var minionq =
+                    EntityManager.MinionsAndMonsters.EnemyMinions.FirstOrDefault(
+                        m => m.IsValidTarget(Q.Range) && m.Health < SpellDamage.GetRealDamage(SpellSlot.Q, m));
+
+                if (minionq != null)
+                {
+                    Q.Cast(minionq);
+                }
+            }
+
+            if (Program.CanW)
+            {
+                var minionw =
+                   EntityManager.MinionsAndMonsters.EnemyMinions.FirstOrDefault(
+                       m => m.IsValidTarget(Player.Instance.AttackRange));
+
+                if (minionw != null)
+                {
+                    W.Cast();
+                }
+            }
         }
     }
 }

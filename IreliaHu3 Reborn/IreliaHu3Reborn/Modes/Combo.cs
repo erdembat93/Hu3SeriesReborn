@@ -15,16 +15,27 @@ namespace AddonTemplate.Modes
 
         public override void Execute()
         {
-            // TODO: Add combo logic here
-            // See how I used the Settings.UseQ here, this is why I love my way of using
-            // the menu in the Config class!
-            if (Settings.UseQ && Q.IsReady())
+            var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
+            if (target == null || target.IsZombie || target.HasUndyingBuff()) return;
+
+            if (Q.IsReady() && Settings.UseQ && target.IsValidTarget(Q.Range))
             {
-                var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
-                if (target != null)
-                {
-                    Q.Cast(target);
-                }
+                Q.Cast(target);
+            }
+
+            if (Program.CanW)
+            {
+                W.Cast();
+            }
+
+            if (E.IsReady() && Settings.UseE && target.IsValidTarget(E.Range) && (target.HealthPercent > Player.Instance.HealthPercent || target.IsInRange(Player.Instance, Player.Instance.AttackRange)))
+            {
+                E.Cast(target);
+            }
+
+            if (R.IsReady() && Settings.UseR && target.IsValidTarget(R.Range))
+            {
+                R.Cast(target);
             }
         }
     }

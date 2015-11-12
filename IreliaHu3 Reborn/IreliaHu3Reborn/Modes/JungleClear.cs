@@ -1,4 +1,8 @@
-﻿using EloBuddy.SDK;
+﻿using System.Linq;
+using EloBuddy;
+using EloBuddy.SDK;
+
+using Settings = AddonTemplate.Config.Modes.LaneClear;
 
 namespace AddonTemplate.Modes
 {
@@ -11,7 +15,22 @@ namespace AddonTemplate.Modes
 
         public override void Execute()
         {
-            // TODO: Add jungleclear logic here
+            if (Q.IsReady() && Settings.UseQ)
+            {
+                var minionq =
+                    EntityManager.MinionsAndMonsters.EnemyMinions.FirstOrDefault(
+                        m => m.IsValidTarget(Q.Range));
+
+                if (minionq != null)
+                {
+                    Q.Cast(minionq);
+                }
+            }
+
+            if (Program.CanW)
+            {
+                W.Cast();
+            }
         }
     }
 }

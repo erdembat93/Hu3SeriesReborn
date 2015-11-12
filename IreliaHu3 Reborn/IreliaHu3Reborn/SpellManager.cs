@@ -1,21 +1,22 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
+using EloBuddy.SDK.Enumerations;
 
 namespace AddonTemplate
 {
     public static class SpellManager
     {
-        public static Spell.Active Q { get; private set; }
+        public static Spell.Targeted Q { get; private set; }
         public static Spell.Active W { get; private set; }
-        public static Spell.Active E { get; private set; }
-        public static Spell.Targeted R { get; private set; }
+        public static Spell.Targeted E { get; private set; }
+        public static Spell.Skillshot R { get; private set; }
 
         static SpellManager()
         {
-            Q = new Spell.Active(SpellSlot.Q, 1000);
-            W = new Spell.Active(SpellSlot.W, 800);
-            E = new Spell.Active(SpellSlot.E, 700);
-            R = new Spell.Targeted(SpellSlot.R, 600);
+            Q = new Spell.Targeted(SpellSlot.Q, 650);
+            W = new Spell.Active(SpellSlot.W, (uint)Player.Instance.AttackRange);
+            E = new Spell.Targeted(SpellSlot.E, 425);
+            R = new Spell.Skillshot(SpellSlot.R, 1000, SkillShotType.Linear, 500, 1600, 120);
         }
 
         public static void Initialize()

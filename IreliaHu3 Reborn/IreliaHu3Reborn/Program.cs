@@ -1,5 +1,6 @@
 ﻿using System;
 using EloBuddy;
+using EloBuddy.SDK;
 using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Rendering;
 using Color = System.Drawing.Color;
@@ -12,6 +13,8 @@ namespace AddonTemplate
     {
         // ReSharper disable once MemberCanBePrivate.Global
         public const string ChampName = "Caitlyn";
+
+        public static bool CanW;
 
         public static void Main(string[] args)
         {
@@ -30,6 +33,7 @@ namespace AddonTemplate
             ModeManager.Initialize();
             DamageIndicator.Initialize(SpellDamage.GetTotalDamage);
 
+            Orbwalker.OnPreAttack += Orbwalker_OnPreAttack;
             Drawing.OnDraw += OnDraw;
         }
 
@@ -54,6 +58,11 @@ namespace AddonTemplate
             {
                 new Circle { Color = Settings.colorR, BorderWidth = Settings._widthR, Radius = SpellManager.R.Range }.Draw(Player.Instance.Position);
             }
+        }
+
+        static void Orbwalker_OnPreAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
+        {
+            CanW = SpellManager.W.IsReady();
         }
     }
 }

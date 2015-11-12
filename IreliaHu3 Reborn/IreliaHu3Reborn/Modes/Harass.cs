@@ -13,16 +13,22 @@ namespace AddonTemplate.Modes
 
         public override void Execute()
         {
-            // TODO: Add harass logic here
-            // See how I used the Settings.UseQ and Settings.Mana here, this is why I love
-            // my way of using the menu in the Config class!
-            if (/*Settings.UseQ && Player.Instance.ManaPercent > Settings.Mana &&*/ Q.IsReady())
+            var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
+            if (target == null || target.IsZombie || target.HasUndyingBuff()) return;
+
+            if (Q.IsReady() && Settings.UseQ && target.IsValidTarget(Q.Range))
             {
-                var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
-                if (target != null)
-                {
-                    Q.Cast(target);
-                }
+                Q.Cast(target);
+            }
+
+            if (Program.CanW)
+            {
+                W.Cast();
+            }
+
+            if (E.IsReady() && Settings.UseE && target.IsValidTarget(E.Range))
+            {
+                E.Cast(target);
             }
         }
     }
