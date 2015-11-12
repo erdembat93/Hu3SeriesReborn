@@ -415,19 +415,6 @@ namespace YasuoHu3Reborn.EvadePlus
                         LastEvadeResult = evade;
                     }
                 }
-                else
-                {
-                    if (!evade.EnoughTime && LastEvadeResult == null && !IsHeroPathSafe(evade, desiredPath))
-                    {
-                        var result = EvadeSpellManager.ProcessFlash(this);
-                        if (!result && AlwaysEvade && evade.IsValid)
-                        {
-                            MoveTo(evade.WalkPoint);
-                        }
-
-                        return result;
-                    }
-                }
 
                 if (LastEvadeResult != null && !IsHeroPathSafe(evade, desiredPath))
                 {

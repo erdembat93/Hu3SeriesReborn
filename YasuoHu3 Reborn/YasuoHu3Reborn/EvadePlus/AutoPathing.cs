@@ -48,7 +48,7 @@ namespace YasuoHu3Reborn.EvadePlus
 
         private static void OnDraw(EventArgs args)
         {
-            if (Path == null || !IsPathing || EvadeMenu.DrawMenu["disableAllDrawings"].Cast<CheckBox>().CurrentValue)
+            if (Path == null || !IsPathing) //|| EvadeMenu.DrawMenu["disableAllDrawings"].Cast<CheckBox>().CurrentValue)
             {
                 return;
             }

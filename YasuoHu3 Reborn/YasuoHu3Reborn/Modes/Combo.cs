@@ -39,7 +39,7 @@ namespace YasuoHu3Reborn.Modes
                                 && (m.Distance(target) < Player.Instance.Distance(target))
                                 && Player.Instance.IsFacing(m) && m.CanE() && !m.GetAfterEPos().Tower());
 
-                if (minion != null)
+                if (minion != null && !target.IsInRange(Player.Instance, Player.Instance.AttackRange))
                 {
                     SpellManager.E.Cast(minion);
                 }

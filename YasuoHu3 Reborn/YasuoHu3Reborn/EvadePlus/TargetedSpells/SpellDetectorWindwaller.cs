@@ -8,14 +8,13 @@ namespace YasuoHu3Reborn.EvadePlus.TargetedSpells
 {
     class SpellDetectorWindwaller
     {
-        private static Menu TargetedMenu;
         public static void Init()
         {
             Config.Modes.EvaderMenu.AddGroupLabel("Targeted Skills");
             foreach (var enemy in EntityManager.Heroes.Enemies)
             {
-                TargetedMenu.AddSeparator();
-                TargetedMenu.AddLabel(enemy.ChampionName);
+                Config.Modes.EvaderMenu.AddSeparator();
+                Config.Modes.EvaderMenu.AddLabel(enemy.ChampionName);
                 foreach (var spell in TargetSpellDatabase.Spells.Where(a => a.Type == SpellType.Targeted && a.ChampionName == enemy.ChampionName.ToLower()))
                 {
                     Config.Modes.EvaderMenu.Add(spell.Name + "/e", new CheckBox(spell.Name + ": " + spell.Spellslot));
@@ -29,7 +28,7 @@ namespace YasuoHu3Reborn.EvadePlus.TargetedSpells
         {
             if (sender.IsAlly || !(sender is AIHeroClient) || args.Target == null || !args.Target.IsMe || Player.GetSpell(SpellSlot.W).State != SpellState.Ready) return;
             var spell = TargetSpellDatabase.GetByName(args.SData.Name);
-            if (spell != null && TargetedMenu[spell.Name + "/e"] != null && TargetedMenu[spell.Name + "/e"].Cast<CheckBox>().CurrentValue)
+            if (spell != null && Config.Modes.EvaderMenu[spell.Name + "/e"] != null && Config.Modes.EvaderMenu[spell.Name + "/e"].Cast<CheckBox>().CurrentValue)
             {
                 Core.DelayAction(delegate { Player.CastSpell(SpellSlot.W, sender.Position); },
                     (int)

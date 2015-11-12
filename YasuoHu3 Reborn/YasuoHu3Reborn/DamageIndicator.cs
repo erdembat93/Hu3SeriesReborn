@@ -10,14 +10,14 @@ namespace YasuoHu3Reborn
 {
     public static class DamageIndicator
     {
-        private const int BarWidth = 104;
+        private const int BarWidth = 106;
         private const int LineThickness = 9;
 
         public delegate float DamageToUnitDelegate(AIHeroClient hero);
 
         private static DamageToUnitDelegate DamageToUnit { get; set; }
 
-        private static readonly Vector2 BarOffset = new Vector2(-9, 11);
+        private static readonly Vector2 BarOffset = new Vector2(0, 0);
 
         private static Color _drawingColor;
 

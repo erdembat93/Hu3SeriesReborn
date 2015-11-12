@@ -9,27 +9,19 @@ namespace YasuoHu3Reborn.EvadePlus
 {
     internal class EvadeMenu
     {
-        public static Menu MainMenu { get; private set; }
-        public static Menu SkillshotMenu { get; private set; }
-        public static Menu SpellMenu { get; private set; }
-        public static Menu DrawMenu { get; private set; }
-        public static Menu ControlsMenu { get; private set; }
-
         public static readonly Dictionary<string, EvadeSkillshot> MenuSkillshots =
             new Dictionary<string, EvadeSkillshot>();
 
         public static void CreateMenu()
         {
-            if (MainMenu != null)
-            {
-                return;
-            }
-
-            MainMenu = EloBuddy.SDK.Menu.MainMenu.AddMenu("YasuoEvade", "YasuoEvade");
+            //if (MainMenu != null)
+            // {
+            //return;
+            // }
 
             // Set up main menu
             Config.Modes.EvaderMenu.AddGroupLabel("SkillShots Settings");
-            MainMenu.AddSeparator();
+            Config.Modes.EvaderMenu.AddSeparator();
 
             TargetedSpells.SpellDetectorWindwaller.Init();
 
@@ -76,9 +68,9 @@ namespace YasuoHu3Reborn.EvadePlus
                 {
                     GetSkillshot(sender.SerializationId).SpellData.DangerValue = args.NewValue;
                 };
-                SkillshotMenu.Add(skillshotString + "/dangervalue", dangerValue);
+                Config.Modes.EvaderMenu.Add(skillshotString + "/dangervalue", dangerValue);
 
-                SkillshotMenu.AddSeparator();
+                Config.Modes.EvaderMenu.AddSeparator();
             }
         }
 
@@ -90,19 +82,19 @@ namespace YasuoHu3Reborn.EvadePlus
         public static bool IsSkillshotW(EvadeSkillshot skillshot)
         {
             if (!(skillshot is LinearMissileSkillshot)) return false;
-            var valueBase = SkillshotMenu[skillshot + "/wEvade"];
+            var valueBase = Config.Modes.EvaderMenu[skillshot + "/wEvade"];
             return valueBase != null && valueBase.Cast<CheckBox>().CurrentValue;
         }
 
         public static bool IsSkillshotEnabled(EvadeSkillshot skillshot)
         {
-            var valueBase = SkillshotMenu[skillshot + "/enable"];
+            var valueBase = Config.Modes.EvaderMenu[skillshot + "/enable"];
             return valueBase != null && valueBase.Cast<CheckBox>().CurrentValue;
         }
 
         public static bool IsSkillshotDrawingEnabled(EvadeSkillshot skillshot)
         {
-            var valueBase = SkillshotMenu[skillshot + "/draw"];
+            var valueBase = Config.Modes.EvaderMenu[skillshot + "/draw"];
             return valueBase != null && valueBase.Cast<CheckBox>().CurrentValue;
         }
     }
