@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
+
 using Settings = AddonTemplate.Config.Modes.LaneClear;
 
 namespace AddonTemplate.Modes
@@ -17,12 +18,16 @@ namespace AddonTemplate.Modes
             var minion =
                 EntityManager.MinionsAndMonsters.GetJungleMonsters()
                     .FirstOrDefault(m => m.IsValidTarget(Player.Instance.AttackRange));
+            if (minion == null) return;
+
             if (minion.IsValidTarget(E.Range) && Settings.UseE)
             {
                 E.Cast(minion);
             }
+
             if (minion.HasBuff("tristanaecharge"))
             {
+                Q.Cast();
                 Orbwalker.ForcedTarget = minion;
             }
         }

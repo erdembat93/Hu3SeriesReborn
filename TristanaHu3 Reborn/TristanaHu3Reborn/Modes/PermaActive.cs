@@ -20,10 +20,8 @@ namespace AddonTemplate.Modes
                 var stacks = target.GetBuffCount("tristanaecharge");
                 if (stacks >= 1)
                 {
-                    var erdamage = (SpellDamage.GetRealDamage(SpellSlot.E, target)*((0.30*stacks) + 1) +
-                                    SpellDamage.GetRealDamage(SpellSlot.R, target));
-
-                    if (target.Health <= erdamage)
+                    if (target.Health <= (SpellDamage.GetRealDamage(SpellSlot.E, target)*((0.30*stacks) + 1) +
+                                          SpellDamage.GetRealDamage(SpellSlot.R, target)))
                     {
                         R.Cast(target);
                     }

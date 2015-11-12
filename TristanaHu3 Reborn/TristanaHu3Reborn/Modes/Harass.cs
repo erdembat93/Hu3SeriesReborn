@@ -16,6 +16,8 @@ namespace AddonTemplate.Modes
             var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
             if (target == null || target.IsZombie || target.HasUndyingBuff()) return;
 
+            Orbwalker.ForcedTarget = null;
+
             if (Settings.UseE && E.IsReady() && target.IsValidTarget(E.Range))
             {
                 E.Cast(target);

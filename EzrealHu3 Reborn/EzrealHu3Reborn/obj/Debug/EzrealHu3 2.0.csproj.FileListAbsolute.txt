@@ -1,0 +1,11 @@
+C:\Users\MarioGK\Documents\GitHub\Hu3Series\EzrealHu3 2.0\EzrealHu3 2.0\bin\Debug\EzrealHu3 2.0.exe.config
+C:\Users\MarioGK\Documents\GitHub\Hu3Series\EzrealHu3 2.0\EzrealHu3 2.0\bin\Debug\EzrealHu3 2.0.exe
+C:\Users\MarioGK\Documents\GitHub\Hu3Series\EzrealHu3 2.0\EzrealHu3 2.0\bin\Debug\EzrealHu3 2.0.pdb
+C:\Users\MarioGK\Documents\GitHub\Hu3Series\EzrealHu3 2.0\EzrealHu3 2.0\bin\Debug\EloBuddy.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3Series\EzrealHu3 2.0\EzrealHu3 2.0\bin\Debug\EloBuddy.SDK.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3Series\EzrealHu3 2.0\EzrealHu3 2.0\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3Series\EzrealHu3 2.0\EzrealHu3 2.0\bin\Debug\SharpDX.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3Series\EzrealHu3 2.0\EzrealHu3 2.0\bin\Debug\Newtonsoft.Json.dll
+C:\Users\MarioGK\Documents\GitHub\Hu3Series\EzrealHu3 2.0\EzrealHu3 2.0\obj\Debug\EzrealHu3 2.0.csprojResolveAssemblyReference.cache
+C:\Users\MarioGK\Documents\GitHub\Hu3Series\EzrealHu3 2.0\EzrealHu3 2.0\obj\Debug\EzrealHu3 2.0.exe
+C:\Users\MarioGK\Documents\GitHub\Hu3Series\EzrealHu3 2.0\EzrealHu3 2.0\obj\Debug\EzrealHu3 2.0.pdb

@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using EloBuddy;
 using EloBuddy.SDK;
-using EloBuddy.SDK.Enumerations;
 using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Rendering;
-using Color = System.Drawing.Color;
-using Settings = AddonTemplate.Config.Modes.Draw;
+using Settings = EzrealHu3.Config.Modes.Draw;
+using Misc = EzrealHu3.Config.Modes.Misc;
 
 
-namespace AddonTemplate
+namespace EzrealHu3
 {
     public static class Program
     {
         // ReSharper disable once MemberCanBePrivate.Global
-        public const string ChampName = "Tristana";
+        public const string ChampName = "Ezreal";
 
         public static void Main(string[] args)
         {
@@ -36,7 +34,6 @@ namespace AddonTemplate
             Drawing.OnDraw += OnDraw;
 
             Gapcloser.OnGapcloser += Gapcloser_OnGapcloser;
-            Interrupter.OnInterruptableSpell += Interrupter_OnInterruptableSpell;
         }
 
         private static void OnDraw(EventArgs args)
@@ -58,24 +55,19 @@ namespace AddonTemplate
 
             if (Settings.DrawReady ? SpellManager.R.IsReady() : Settings.DrawR)
             {
-                new Circle { Color = Settings.colorR, BorderWidth = Settings._widthR, Radius = SpellManager.R.Range }.Draw(Player.Instance.Position);
+                new Circle { Color = Settings.colorR, BorderWidth = Settings._widthR, Radius = Misc.minR }.Draw(Player.Instance.Position);
+                new Circle { Color = Settings.colorR, BorderWidth = Settings._widthR, Radius = Misc.maxR }.Draw(Player.Instance.Position);
             }
         }
 
-        static void Gapcloser_OnGapcloser(AIHeroClient sender, Gapcloser.GapcloserEventArgs e)
+        private static void Gapcloser_OnGapcloser(AIHeroClient sender, Gapcloser.GapcloserEventArgs e)
         {
-            if (sender.IsEnemy && sender.IsInRange(Player.Instance, SpellManager.R.Range) && Player.Instance.Distance(e.End) < SpellManager.R.Range)
+            if (Misc.GapE && SpellManager.E.IsReady())
             {
-                SpellManager.R.Cast(sender);
-            }
-        }
-
-
-        static void Interrupter_OnInterruptableSpell(Obj_AI_Base sender, Interrupter.InterruptableSpellEventArgs e)
-        {
-            if (sender.IsValidTarget(SpellManager.R.Range) && e.DangerLevel >= DangerLevel.High)
-            {
-                SpellManager.R.Cast(sender);
+                if (sender.IsEnemy && sender.IsVisible && Player.Instance.Distance(e.End) < 600)
+                {
+                    SpellManager.E.Cast(Player.Instance.Position.Shorten(sender.Position, SpellManager.E.Range));
+                }
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using EloBuddy.SDK;
+﻿using System.Data.SqlClient;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using Color = System.Drawing.Color;
@@ -8,11 +8,11 @@ using Color = System.Drawing.Color;
 // ReSharper disable InconsistentNaming
 // ReSharper disable MemberHidesStaticFromOuterClass
 
-namespace AddonTemplate
+namespace EzrealHu3
 {
     public static class Config
     {
-        private const string MenuName = "TristanaHu3 Reborn";
+        private const string MenuName = "EzrealHu3 2.0";
 
         private static readonly Menu Menu;
 
@@ -20,8 +20,9 @@ namespace AddonTemplate
         {
             // Initialize the menu
             Menu = MainMenu.AddMenu(MenuName, MenuName.ToLower());
-            Menu.AddGroupLabel("TristanaHu3 Reborn");
-            Menu.AddLabel("Made By: MarioGK", 50);
+            Menu.AddGroupLabel("EzrealHu3 2.0");
+            Menu.AddSeparator();
+            Menu.AddGroupLabel("Made By: MarioGK");
 
             // Initialize the modes
             Modes.Initialize();
@@ -43,6 +44,8 @@ namespace AddonTemplate
                 Menu.AddSeparator();
                 Harass.Initialize();
                 Menu.AddSeparator();
+                AutoHarass.Initialize();
+                Menu.AddSeparator();
                 LaneClear.Initialize();
                 Menu.AddSeparator();
                 LastHit.Initialize();
@@ -63,6 +66,7 @@ namespace AddonTemplate
                 private static readonly CheckBox _useW;
                 private static readonly CheckBox _useE;
                 private static readonly CheckBox _useR;
+                private static readonly Slider _minR;
 
                 public static bool UseQ
                 {
@@ -84,14 +88,20 @@ namespace AddonTemplate
                     get { return _useR.CurrentValue; }
                 }
 
+                public static int MinR
+                {
+                    get { return _minR.CurrentValue; }
+                }
+
                 static Combo()
                 {
                     // Initialize the menu values
                     ModesMenu.AddGroupLabel("Combo");
                     _useQ = ModesMenu.Add("comboQ", new CheckBox("Use Q"));
                     _useW = ModesMenu.Add("comboW", new CheckBox("Use W"));
-                    _useE = ModesMenu.Add("comboE", new CheckBox("Use E"));
-                    _useR = ModesMenu.Add("comboR", new CheckBox("Use R", false)); // Default false
+                    _useE = ModesMenu.Add("comboE", new CheckBox("Use E Smart", false));
+                    _useR = ModesMenu.Add("comboR", new CheckBox("Use R on multiple enemies", false));
+                    _minR = ModesMenu.Add("minR", new Slider("Min Enemies to use R", 2, 0, 5));
                 }
 
                 public static void Initialize()
@@ -103,7 +113,7 @@ namespace AddonTemplate
             {
                 private static readonly CheckBox _useQ;
                 private static readonly CheckBox _useW;
-                private static readonly CheckBox _useE;
+                private static readonly Slider _manaQ;
 
                 public static bool UseQ
                 {
@@ -115,9 +125,9 @@ namespace AddonTemplate
                     get { return _useW.CurrentValue; }
                 }
 
-                public static bool UseE
+                public static int ManaHarass
                 {
-                    get { return _useE.CurrentValue; }
+                    get { return _manaQ.CurrentValue; }
                 }
 
                 static Harass()
@@ -126,7 +136,42 @@ namespace AddonTemplate
                     ModesMenu.AddGroupLabel("Harass");
                     _useQ = ModesMenu.Add("harassQ", new CheckBox("Use Q"));
                     _useW = ModesMenu.Add("harassW", new CheckBox("Use W"));
-                    _useE = ModesMenu.Add("harassE", new CheckBox("Use E"));
+                    _manaQ = ModesMenu.Add("manaHaras", new Slider("Min Mana To Haras", 30));
+                }
+
+                public static void Initialize()
+                {
+                }
+            }
+
+            public static class AutoHarass
+            {
+                private static readonly CheckBox _autouseQ;
+                private static readonly CheckBox _autouseW;
+                private static readonly Slider _automanaQ;
+
+                public static bool UseQ
+                {
+                    get { return _autouseQ.CurrentValue; }
+                }
+
+                public static bool UseW
+                {
+                    get { return _autouseW.CurrentValue; }
+                }
+
+                public static int ManaAutoHarass
+                {
+                    get { return _automanaQ.CurrentValue; }
+                }
+
+                static AutoHarass()
+                {
+                    // Initialize the menu values
+                    ModesMenu.AddGroupLabel("Harass");
+                    _autouseQ = ModesMenu.Add("autoharassQ", new CheckBox("Use Q"));
+                    _autouseW = ModesMenu.Add("autoharassW", new CheckBox("Use W"));
+                    _automanaQ = ModesMenu.Add("automanaHaras", new Slider("Min Mana To Haras", 30));
                 }
 
                 public static void Initialize()
@@ -137,38 +182,23 @@ namespace AddonTemplate
             public static class LaneClear
             {
                 private static readonly CheckBox _useQ;
-                private static readonly CheckBox _useW;
-                private static readonly CheckBox _useE;
-                private static readonly CheckBox _useR;
+                private static readonly Slider _manaLane;
 
                 public static bool UseQ
                 {
                     get { return _useQ.CurrentValue; }
                 }
 
-                public static bool UseW
+                public static int ManaLane
                 {
-                    get { return _useW.CurrentValue; }
-                }
-
-                public static bool UseE
-                {
-                    get { return _useE.CurrentValue; }
-                }
-
-                public static bool UseR
-                {
-                    get { return _useR.CurrentValue; }
+                    get { return _manaLane.CurrentValue; }
                 }
 
                 static LaneClear()
                 {
-                    // Initialize the menu values
                     ModesMenu.AddGroupLabel("LaneClear");
                     _useQ = ModesMenu.Add("laneQ", new CheckBox("Use Q"));
-                    _useW = ModesMenu.Add("laneW", new CheckBox("Use W"));
-                    _useE = ModesMenu.Add("laneE", new CheckBox("Use E"));
-                    _useR = ModesMenu.Add("laneR", new CheckBox("Use R", false)); // Default false
+                    _manaLane = ModesMenu.Add("manaLane", new Slider("Min Mana To Use Lane Clear" , 30));
                 }
 
                 public static void Initialize()
@@ -179,28 +209,16 @@ namespace AddonTemplate
             public static class LastHit
             {
                 private static readonly CheckBox _useQ;
-                private static readonly CheckBox _useW;
-                private static readonly CheckBox _useE;
-                private static readonly CheckBox _useR;
+                private static readonly Slider _manaLast;
 
                 public static bool UseQ
                 {
                     get { return _useQ.CurrentValue; }
                 }
 
-                public static bool UseW
+                public static int ManaLast
                 {
-                    get { return _useW.CurrentValue; }
-                }
-
-                public static bool UseE
-                {
-                    get { return _useE.CurrentValue; }
-                }
-
-                public static bool UseR
-                {
-                    get { return _useR.CurrentValue; }
+                    get { return _manaLast.CurrentValue; }
                 }
 
                 static LastHit()
@@ -208,9 +226,7 @@ namespace AddonTemplate
                     // Initialize the menu values
                     ModesMenu.AddGroupLabel("LastHit");
                     _useQ = ModesMenu.Add("lastQ", new CheckBox("Use Q"));
-                    _useW = ModesMenu.Add("lastW", new CheckBox("Use W"));
-                    _useE = ModesMenu.Add("lastE", new CheckBox("Use E"));
-                    _useR = ModesMenu.Add("lastR", new CheckBox("Use R", false)); // Default false
+                    _manaLast = ModesMenu.Add("manaLast", new Slider("Min Mana To Use Lane Clear", 30));
                 }
 
                 public static void Initialize()
@@ -220,44 +236,69 @@ namespace AddonTemplate
 
             public static class Misc
             {
-                private static readonly CheckBox _enemies;
-                private static readonly CheckBox _Rint;
-                private static readonly CheckBox _Rgap;
-                
-                public static bool Enemies
+                private static readonly CheckBox _fleeE;
+                private static readonly CheckBox _stunR;
+                private static readonly CheckBox _gapE;
+                private static readonly CheckBox _ksR;
+                private static readonly Slider _minKsR;
+                private static readonly Slider _maxKsR;
+                private static readonly Slider _minHealthKsR;
+
+                public static bool UseE
                 {
-                    get { return _enemies.CurrentValue; }
+                    get { return _fleeE.CurrentValue; }
                 }
 
-                public static bool RInt
+                public static bool UseR
                 {
-                    get { return _Rint.CurrentValue; }
+                    get { return _stunR.CurrentValue; }
                 }
 
-                public static bool RGap
+                public static bool GapE
                 {
-                    get { return _Rgap.CurrentValue; }
+                    get { return _gapE.CurrentValue; }
+                }
+
+                public static bool KSR
+                {
+                    get { return _ksR.CurrentValue; }
+                }
+
+                public static int minR
+                {
+                    get { return _minKsR.CurrentValue; }
+                }
+
+                public static int maxR
+                {
+                    get { return _maxKsR.CurrentValue; }
+                }
+
+                public static int MinHealthR
+                {
+                    get { return _minHealthKsR.CurrentValue; }
                 }
 
                 static Misc()
                 {
                     // Initialize the menu values
-                    ModesMenu.AddGroupLabel("Exclude E List");
-                    foreach (var enemy in EntityManager.Heroes.Enemies)
-                    {
-                        _enemies = ModesMenu.Add("dont e" + enemy.ChampionName,
-                            new CheckBox("Don't use E on" + enemy.ChampionName, false));
-                    }
+                    ModesMenu.AddGroupLabel("Misc");
+                    _fleeE = ModesMenu.Add("fleeE", new CheckBox("Use E to Flee ?"));
+                    _stunR = ModesMenu.Add("stunUlt", new CheckBox("Use R when target is CC`ed ?"));
+                    _gapE = ModesMenu.Add("gapE", new CheckBox("Use E on Gapcloser ?"));
+                    ModesMenu.AddGroupLabel("KS");
+                    _ksR = ModesMenu.Add("ksR", new CheckBox("Use R to KS"));
+                    _minKsR = ModesMenu.Add("ksminR", new Slider("Min Range to KS with R", 600, 300, 2000));
+                    _maxKsR = ModesMenu.Add("ksmaxR", new Slider("Max Range to KS with R", 1500, 300, 2000));
+                    _minHealthKsR = ModesMenu.Add("kshealthR", new Slider("Min Health to KS with R", 200, 0, 650));
 
-                    ModesMenu.AddGroupLabel("Interrupt/Gapcloser");
-                    _Rint = ModesMenu.Add("rint", new CheckBox("Use R On Interruptable Spell"));
-                    _Rgap = ModesMenu.Add("rgap", new CheckBox("Use R On GapCloser"));
                 }
 
                 public static void Initialize()
                 {
                 }
             }
+
             public static class Draw
             {
                 private static readonly CheckBox _drawHealth;

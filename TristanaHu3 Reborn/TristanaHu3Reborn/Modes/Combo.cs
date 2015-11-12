@@ -1,6 +1,5 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
-using EloBuddy.SDK.Menu.Values;
 
 // Using the config like this makes your life easier, trust me
 using Settings = AddonTemplate.Config.Modes.Combo;
@@ -19,6 +18,8 @@ namespace AddonTemplate.Modes
         {
             var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
             if (target == null || target.IsZombie || target.HasUndyingBuff()) return;
+
+            Orbwalker.ForcedTarget = null;
 
             if (Settings.UseE && E.IsReady() && target.IsValidTarget(E.Range) && !Configs.Enemies)
             {
