@@ -1,4 +1,9 @@
-﻿namespace YasuoHu3Reborn.Modes
+﻿using EloBuddy;
+using EloBuddy.SDK;
+
+using Settings = YasuoHu3Reborn.Config.Modes.Misc;
+
+namespace YasuoHu3Reborn.Modes
 {
     public sealed class PermaActive : ModeBase
     {
@@ -9,7 +14,13 @@
 
         public override void Execute()
         {
-            // TODO: Add permaactive logic here, good for spells like Ignite or Smite
+            var target = TargetSelector.GetTarget(480, DamageType.Physical);
+            if (target == null) return;
+
+            if (Settings.AutoQ && Q.IsReady() && !Player.Instance.HasQ3())
+            {
+                Q.Cast(target);
+            }
         }
     }
 }

@@ -241,6 +241,28 @@ namespace YasuoHu3Reborn
                 }
             }
 
+            public static class Misc
+            {
+                private static readonly CheckBox _autoQ;
+
+
+                public static bool AutoQ
+                {
+                    get { return _autoQ.CurrentValue; }
+                }
+
+                static Misc()
+                {
+                    // Initialize the menu values
+                    ModesMenu.AddGroupLabel("Misc");
+                    _autoQ = ModesMenu.Add("autoQ", new CheckBox("Use Auto Q"));
+                }
+
+                public static void Initialize()
+                {
+                }
+            }
+
             public static class Draw
             {
                 private static readonly CheckBox _drawHealth;
