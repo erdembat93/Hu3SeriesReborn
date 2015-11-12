@@ -11,7 +11,7 @@ namespace AddonTemplate
 {
     public static class Config
     {
-        private const string MenuName = "IreliaHu3 Reborn";
+        private const string MenuName = "AddonTemplate";
 
         private static readonly Menu Menu;
 
@@ -19,7 +19,7 @@ namespace AddonTemplate
         {
             // Initialize the menu
             Menu = MainMenu.AddMenu(MenuName, MenuName.ToLower());
-            Menu.AddGroupLabel("IreliaHu3 Reborn");
+            Menu.AddGroupLabel("AddonTemplate");
             Menu.AddLabel("Made By: MarioGK", 50);
 
             // Initialize the modes
@@ -60,7 +60,6 @@ namespace AddonTemplate
                 private static readonly CheckBox _useW;
                 private static readonly CheckBox _useE;
                 private static readonly CheckBox _useR;
-                private static readonly Slider _delayR;
 
                 public static bool UseQ
                 {
@@ -82,11 +81,6 @@ namespace AddonTemplate
                     get { return _useR.CurrentValue; }
                 }
 
-                public static int DelayR
-                {
-                    get { return _delayR.CurrentValue; }
-                }
-
                 static Combo()
                 {
                     // Initialize the menu values
@@ -94,8 +88,7 @@ namespace AddonTemplate
                     _useQ = ModesMenu.Add("comboQ", new CheckBox("Use Q"));
                     _useW = ModesMenu.Add("comboW", new CheckBox("Use W"));
                     _useE = ModesMenu.Add("comboE", new CheckBox("Use E"));
-                    _useR = ModesMenu.Add("comboR", new CheckBox("Use R"));
-                    _delayR = ModesMenu.Add("delayR", new Slider("Delay between R casts", 100, 0 , 400));
+                    _useR = ModesMenu.Add("comboR", new CheckBox("Use R", false)); // Default false
                 }
 
                 public static void Initialize()
@@ -108,6 +101,7 @@ namespace AddonTemplate
                 private static readonly CheckBox _useQ;
                 private static readonly CheckBox _useW;
                 private static readonly CheckBox _useE;
+                private static readonly CheckBox _useR;
 
                 public static bool UseQ
                 {
@@ -124,6 +118,11 @@ namespace AddonTemplate
                     get { return _useE.CurrentValue; }
                 }
 
+                public static bool UseR
+                {
+                    get { return _useR.CurrentValue; }
+                }
+
                 static Harass()
                 {
                     // Initialize the menu values
@@ -131,6 +130,7 @@ namespace AddonTemplate
                     _useQ = ModesMenu.Add("harassQ", new CheckBox("Use Q"));
                     _useW = ModesMenu.Add("harassW", new CheckBox("Use W"));
                     _useE = ModesMenu.Add("harassE", new CheckBox("Use E"));
+                    _useR = ModesMenu.Add("harassR", new CheckBox("Use R", false)); // Default false
                 }
 
                 public static void Initialize()
@@ -142,7 +142,8 @@ namespace AddonTemplate
             {
                 private static readonly CheckBox _useQ;
                 private static readonly CheckBox _useW;
-                private static readonly Slider _manaLane;
+                private static readonly CheckBox _useE;
+                private static readonly CheckBox _useR;
 
                 public static bool UseQ
                 {
@@ -154,9 +155,14 @@ namespace AddonTemplate
                     get { return _useW.CurrentValue; }
                 }
 
-                public static int ManaLane
+                public static bool UseE
                 {
-                    get { return _manaLane.CurrentValue; }
+                    get { return _useE.CurrentValue; }
+                }
+
+                public static bool UseR
+                {
+                    get { return _useR.CurrentValue; }
                 }
 
                 static LaneClear()
@@ -165,7 +171,8 @@ namespace AddonTemplate
                     ModesMenu.AddGroupLabel("LaneClear");
                     _useQ = ModesMenu.Add("laneQ", new CheckBox("Use Q"));
                     _useW = ModesMenu.Add("laneW", new CheckBox("Use W"));
-                    _manaLane = ModesMenu.Add("laneW", new Slider("Min Mana to laneclear", 30));
+                    _useE = ModesMenu.Add("laneE", new CheckBox("Use E"));
+                    _useR = ModesMenu.Add("laneR", new CheckBox("Use R", false)); // Default false
                 }
 
                 public static void Initialize()
@@ -176,16 +183,28 @@ namespace AddonTemplate
             public static class LastHit
             {
                 private static readonly CheckBox _useQ;
-                private static readonly Slider _manaLast;
+                private static readonly CheckBox _useW;
+                private static readonly CheckBox _useE;
+                private static readonly CheckBox _useR;
 
                 public static bool UseQ
                 {
                     get { return _useQ.CurrentValue; }
                 }
 
-                public static int ManaLast
+                public static bool UseW
                 {
-                    get { return _manaLast.CurrentValue; }
+                    get { return _useW.CurrentValue; }
+                }
+
+                public static bool UseE
+                {
+                    get { return _useE.CurrentValue; }
+                }
+
+                public static bool UseR
+                {
+                    get { return _useR.CurrentValue; }
                 }
 
                 static LastHit()
@@ -193,7 +212,9 @@ namespace AddonTemplate
                     // Initialize the menu values
                     ModesMenu.AddGroupLabel("LastHit");
                     _useQ = ModesMenu.Add("lastQ", new CheckBox("Use Q"));
-                    _manaLast = ModesMenu.Add("laneW", new Slider("Min Mana to laneclear", 40));
+                    _useW = ModesMenu.Add("lastW", new CheckBox("Use W"));
+                    _useE = ModesMenu.Add("lastE", new CheckBox("Use E"));
+                    _useR = ModesMenu.Add("lastR", new CheckBox("Use R", false)); // Default false
                 }
 
                 public static void Initialize()

@@ -1,0 +1,3 @@
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\GalioHu3 Reborn\GalioHu3 Reborn\bin\Debug\AddonTemplate.exe.config
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\GalioHu3 Reborn\GalioHu3 Reborn\obj\Debug\AddonTemplate.exe
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\GalioHu3 Reborn\GalioHu3 Reborn\obj\Debug\AddonTemplate.pdb

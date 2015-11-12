@@ -15,7 +15,7 @@ namespace AddonTemplate.Modes
 
         public override void Execute()
         {
-            if (Q.IsReady() && Settings.UseQ)
+            if (Q.IsReady() && Settings.UseQ && Player.Instance.ManaPercent <= Settings.ManaLast)
             {
                 var minionq =
                     EntityManager.MinionsAndMonsters.EnemyMinions.FirstOrDefault(

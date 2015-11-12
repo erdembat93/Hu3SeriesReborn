@@ -1,4 +1,5 @@
-﻿using EloBuddy;
+﻿using System;
+using EloBuddy;
 using EloBuddy.SDK;
 
 // Using the config like this makes your life easier, trust me
@@ -13,6 +14,8 @@ namespace AddonTemplate.Modes
             return Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo);
         }
 
+        private static int _lastRCast;
+
         public override void Execute()
         {
             var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
@@ -23,7 +26,7 @@ namespace AddonTemplate.Modes
                 Q.Cast(target);
             }
 
-            if (Program.CanW)
+            if (Program.CanW && Settings.UseW)
             {
                 W.Cast();
             }
@@ -33,9 +36,10 @@ namespace AddonTemplate.Modes
                 E.Cast(target);
             }
 
-            if (R.IsReady() && Settings.UseR && target.IsValidTarget(R.Range))
+            if (R.IsReady() && Settings.UseR && target.IsValidTarget(R.Range) && target.HealthPercent <= 50 && _lastRCast < Environment.TickCount + Settings.DelayR)
             {
                 R.Cast(target);
+                _lastRCast = Environment.TickCount;
             }
         }
     }

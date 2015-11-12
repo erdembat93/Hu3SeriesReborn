@@ -15,7 +15,7 @@ namespace AddonTemplate.Modes
 
         public override void Execute()
         {
-            if (Q.IsReady() && Settings.UseQ)
+            if (Q.IsReady() && Settings.UseQ && Player.Instance.ManaPercent <= Settings.ManaLane)
             {
                 var minionq =
                     EntityManager.MinionsAndMonsters.GetJungleMonsters().FirstOrDefault(
@@ -27,7 +27,7 @@ namespace AddonTemplate.Modes
                 }
             }
 
-            if (Program.CanW)
+            if (Program.CanW && Settings.UseW && Player.Instance.ManaPercent <= Settings.ManaLane)
             {
                 W.Cast();
             }

@@ -33,6 +33,8 @@ namespace AddonTemplate
         public static void Initialize(DamageToUnitDelegate damageToUnit)
         {
             DamageToUnit = damageToUnit;
+            DrawingColor = Settings.colorHealth;
+            HealthbarEnabled = Settings.DrawHealth;
 
             Drawing.OnEndScene += OnEndScene;
         }
@@ -41,9 +43,6 @@ namespace AddonTemplate
         {
             if (HealthbarEnabled || PercentEnabled)
             {
-                DrawingColor = Settings.colorHealth;
-                HealthbarEnabled = Settings.DrawHealth;
-
                 foreach (var unit in EntityManager.Heroes.Enemies.Where(u => u.IsValidTarget() && u.IsHPBarRendered))
                 {
                     // Get damage to unit

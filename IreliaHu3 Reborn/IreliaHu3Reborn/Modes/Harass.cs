@@ -21,7 +21,7 @@ namespace AddonTemplate.Modes
                 Q.Cast(target);
             }
 
-            if (Program.CanW)
+            if (Program.CanW && Settings.UseW && (target.HealthPercent > Player.Instance.HealthPercent || target.IsInRange(Player.Instance, Player.Instance.AttackRange)))
             {
                 W.Cast();
             }
