@@ -52,11 +52,7 @@ namespace YasuoHu3Reborn.EvadePlus
             {
                 return;
             }
-
-            if (EvadeMenu.DrawMenu["drawPath"].Cast<CheckBox>().CurrentValue)
-            {
                 Utils.DrawPath(Path, Color.Aqua, 2);
-            }
         }
 
         private static void OnTick(EventArgs args)

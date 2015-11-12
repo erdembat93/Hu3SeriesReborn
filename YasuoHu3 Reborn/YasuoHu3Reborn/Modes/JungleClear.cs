@@ -1,4 +1,6 @@
-﻿using EloBuddy.SDK;
+﻿using System.Linq;
+using EloBuddy.SDK;
+using Settings = YasuoHu3Reborn.Config.Modes.LaneClear;
 
 namespace YasuoHu3Reborn.Modes
 {
@@ -11,7 +13,17 @@ namespace YasuoHu3Reborn.Modes
 
         public override void Execute()
         {
-            // TODO: Add jungleclear logic here
+            var minion = EntityManager.MinionsAndMonsters.GetJungleMonsters().FirstOrDefault();
+
+            if (Settings.UseQ && minion.IsValidTarget(Q.Range) && Q.IsReady())
+            {
+                Q.Cast(minion);
+            }
+
+            if (Settings.UseE && minion.IsValidTarget(E.Range) && E.IsReady())
+            {
+                E.Cast(minion);
+            }
         }
     }
 }

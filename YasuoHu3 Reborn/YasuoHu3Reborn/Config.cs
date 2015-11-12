@@ -33,6 +33,7 @@ namespace YasuoHu3Reborn
         public static class Modes
         {
             private static readonly Menu ModesMenu, DrawMenu;
+            public static readonly Menu EvaderMenu;
 
             static Modes()
             {
@@ -45,6 +46,9 @@ namespace YasuoHu3Reborn
                 LaneClear.Initialize();
                 Menu.AddSeparator();
                 LastHit.Initialize();
+
+                EvaderMenu = Menu.AddSubMenu("Evader");
+                Evade.Initialize();
 
                 DrawMenu = Menu.AddSubMenu("Draw");
                 Draw.Initialize();
@@ -202,6 +206,34 @@ namespace YasuoHu3Reborn
                     _useQ = ModesMenu.Add("lastQ", new CheckBox("Use Q"));
                     _useQ3 = ModesMenu.Add("lastQ3", new CheckBox("Use Q3"));
                     _useE = ModesMenu.Add("lastE", new CheckBox("Use E"));
+                }
+
+                public static void Initialize()
+                {
+                }
+            }
+
+            public static class Evade
+            {
+                private static readonly CheckBox _useW;
+                private static readonly CheckBox _useE;
+
+                public static bool UseW
+                {
+                    get { return _useW.CurrentValue; }
+                }
+
+                public static bool UseE
+                {
+                    get { return _useE.CurrentValue; }
+                }
+
+                static Evade()
+                {
+                    // Initialize the menu values
+                    EvaderMenu.AddGroupLabel("Evade");
+                    _useW = EvaderMenu.Add("evadeW", new CheckBox("Use W to evade"));
+                    _useE = EvaderMenu.Add("evadeE", new CheckBox("Use E to evade"));
                 }
 
                 public static void Initialize()

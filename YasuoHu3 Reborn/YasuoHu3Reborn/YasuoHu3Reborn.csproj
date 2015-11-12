@@ -71,7 +71,11 @@
     <Compile Include="EvadePlus\SkillshotTypes\SpecialTypes\SummonerMark.cs" />
     <Compile Include="EvadePlus\SkillshotTypes\SpecialTypes\YasuoQ.cs" />
     <Compile Include="EvadePlus\SpellData.cs" />
+    <Compile Include="EvadePlus\TargetedSpells\SpellDetectorWindwaller.cs" />
+    <Compile Include="EvadePlus\TargetedSpells\TargetedSpells.cs" />
+    <Compile Include="EvadePlus\TargetedSpells\TargetSpellData.cs" />
     <Compile Include="EvadePlus\Utils.cs" />
+    <Compile Include="Evader.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="ModeManager.cs" />
     <Compile Include="Modes\PermaActive.cs" />

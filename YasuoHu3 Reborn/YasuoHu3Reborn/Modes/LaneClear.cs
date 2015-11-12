@@ -15,16 +15,14 @@ namespace YasuoHu3Reborn.Modes
 
         public override void Execute()
         {
-            if (Settings.UseQ && Settings.UseE && SpellManager.Q.IsReady() && SpellManager.E.IsReady() &&
-                !Player.Instance.HasQ3())
+            if (Settings.UseQ && Settings.UseE && SpellManager.Q.IsReady() && SpellManager.E.IsReady())
             {
                 var minionQe =
                     EntityManager.MinionsAndMonsters.EnemyMinions
                         .FirstOrDefault(
                             m =>
-                                m.IsEnemy && m.IsValidTarget(SpellManager.Q.Range) && m.CanE());
-                if (minionQe != null &&
-                    minionQe.Health <= (SpellDamage.EDamage(minionQe) + SpellDamage.QDamage(minionQe)))
+                                m.IsEnemy && m.IsValidTarget(SpellManager.Q.Range) && m.CanE() && (m.Health <= (SpellDamage.EDamage(m) + SpellDamage.QDamage(m))));
+                if (minionQe != null)
                 {
                     SpellManager.Q.Cast(minionQe);
                 }

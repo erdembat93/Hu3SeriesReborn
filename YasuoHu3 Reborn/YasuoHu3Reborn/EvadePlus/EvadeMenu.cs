@@ -3,6 +3,7 @@ using System.Linq;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
+using YasuoHu3Reborn.EvadePlus.SkillshotTypes;
 
 namespace YasuoHu3Reborn.EvadePlus
 {
@@ -24,24 +25,13 @@ namespace YasuoHu3Reborn.EvadePlus
                 return;
             }
 
-            MainMenu = EloBuddy.SDK.Menu.MainMenu.AddMenu("Evade+", "EvadePlus");
+            MainMenu = EloBuddy.SDK.Menu.MainMenu.AddMenu("YasuoEvade", "YasuoEvade");
 
             // Set up main menu
-            MainMenu.AddGroupLabel("General Settings");
-            MainMenu.Add("fowDetection", new CheckBox("Enable FOW detection"));
-            MainMenu.Add("processSpellDetection", new CheckBox("Enable Process Spell Detection"));
-            MainMenu.Add("limitDetectionRange", new CheckBox("Limit Spell Detection Range"));
-            MainMenu.Add("recalculatePosition", new CheckBox("Allow recalculation of evade position", false));
-            MainMenu.Add("moveToInitialPosition", new CheckBox("Move to desired position after evade.", false));
-            MainMenu.Add("serverTimeBuffer", new Slider("Server Time Buffer", 30));
-            MainMenu.AddSeparator();
+            Config.Modes.EvaderMenu.AddGroupLabel("SkillShots Settings");
             MainMenu.AddSeparator();
 
-            MainMenu.AddGroupLabel("Humanizer");
-            MainMenu.Add("skillshotActivationDelay", new Slider("Skillshot Activation Delay", 0, 0, 400));
-            MainMenu.AddSeparator(10);
-            MainMenu.Add("extraEvadeRange", new Slider("Extra Evade Range", 50, 0, 100));
-            MainMenu.Add("randomizeExtraEvadeRange", new CheckBox("Randomize Extra Evade Range", false));
+            TargetedSpells.SpellDetectorWindwaller.Init();
 
             // Set up skillshot menu
             var heroes = EntityManager.Heroes.Enemies;
@@ -54,9 +44,8 @@ namespace YasuoHu3Reborn.EvadePlus
                         s.SpellData.ChampionName == "AllChampions" &&
                         heroes.Any(obj => obj.Spellbook.Spells.Select(c => c.Name).Contains(s.SpellData.SpellName))));
 
-            SkillshotMenu = MainMenu.AddSubMenu("Skillshots");
-            SkillshotMenu.AddLabel(string.Format("Skillshots Loaded {0}", skillshots.Count));
-            SkillshotMenu.AddSeparator();
+            Config.Modes.EvaderMenu.AddLabel(string.Format("Skillshots Loaded {0}", skillshots.Count));
+            Config.Modes.EvaderMenu.AddSeparator();
 
             foreach (var c in skillshots)
             {
@@ -67,16 +56,20 @@ namespace YasuoHu3Reborn.EvadePlus
 
                 MenuSkillshots.Add(skillshotString, c);
 
-                SkillshotMenu.AddGroupLabel(c.DisplayText);
-                SkillshotMenu.Add(skillshotString + "/enable", new CheckBox("Dodge"));
-                SkillshotMenu.Add(skillshotString + "/draw", new CheckBox("Draw"));
+                Config.Modes.EvaderMenu.AddGroupLabel(c.DisplayText);
+                Config.Modes.EvaderMenu.Add(skillshotString + "/enable", new CheckBox("Dodge"));
+                Config.Modes.EvaderMenu.Add(skillshotString + "/draw", new CheckBox("Draw"));
+                if (c is LinearMissileSkillshot)
+                {
+                    Config.Modes.EvaderMenu.Add(skillshotString + "/wEvade", new CheckBox("W Evade"));
+                }
 
                 var dangerous = new CheckBox("Dangerous", c.SpellData.IsDangerous);
                 dangerous.OnValueChange += delegate(ValueBase<bool> sender, ValueBase<bool>.ValueChangeArgs args)
                 {
                     GetSkillshot(sender.SerializationId).SpellData.IsDangerous = args.NewValue;
                 };
-                SkillshotMenu.Add(skillshotString + "/dangerous", dangerous);
+                Config.Modes.EvaderMenu.Add(skillshotString + "/dangerous", dangerous);
 
                 var dangerValue = new Slider("Danger Value", c.SpellData.DangerValue, 1, 5);
                 dangerValue.OnValueChange += delegate(ValueBase<int> sender, ValueBase<int>.ValueChangeArgs args)
@@ -87,32 +80,18 @@ namespace YasuoHu3Reborn.EvadePlus
 
                 SkillshotMenu.AddSeparator();
             }
-
-            // Set up spell menu
-            SpellMenu = MainMenu.AddSubMenu("Spells");
-            SpellMenu.AddGroupLabel("Flash");
-            SpellMenu.Add("flash", new Slider("Danger Value", 5, 0, 5));
-
-            // Set up draw menu
-            DrawMenu = MainMenu.AddSubMenu("Drawings");
-            DrawMenu.AddGroupLabel("Evade Drawings");
-            DrawMenu.Add("disableAllDrawings", new CheckBox("Disable All Drawings", false));
-            DrawMenu.Add("drawEvadePoint", new CheckBox("Draw Evade Point"));
-            DrawMenu.Add("drawEvadeStatus", new CheckBox("Draw Evade Status"));
-            DrawMenu.Add("drawDangerPolygon", new CheckBox("Draw Danger Polygon", false));
-            DrawMenu.AddSeparator();
-            DrawMenu.Add("drawPath", new CheckBox("Draw Autpathing Path"));
-
-            // Set up controls menu
-            ControlsMenu = MainMenu.AddSubMenu("Controls");
-            ControlsMenu.AddGroupLabel("Controls");
-            ControlsMenu.Add("enableEvade", new KeyBind("Enable Evade", true, KeyBind.BindTypes.PressToggle, 'M'));
-            ControlsMenu.Add("dodgeOnlyDangerous", new KeyBind("Dodge Only Dangerous", false, KeyBind.BindTypes.HoldActive));
         }
 
         private static EvadeSkillshot GetSkillshot(string s)
         {
             return MenuSkillshots[s.ToLower().Split('/')[0]];
+        }
+
+        public static bool IsSkillshotW(EvadeSkillshot skillshot)
+        {
+            if (!(skillshot is LinearMissileSkillshot)) return false;
+            var valueBase = SkillshotMenu[skillshot + "/wEvade"];
+            return valueBase != null && valueBase.Cast<CheckBox>().CurrentValue;
         }
 
         public static bool IsSkillshotEnabled(EvadeSkillshot skillshot)

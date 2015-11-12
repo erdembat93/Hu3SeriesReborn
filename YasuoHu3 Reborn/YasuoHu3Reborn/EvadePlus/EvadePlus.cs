@@ -15,66 +15,65 @@ namespace YasuoHu3Reborn.EvadePlus
     {
         public int ServerTimeBuffer
         {
-            get { return EvadeMenu.MainMenu["serverTimeBuffer"].Cast<Slider>().CurrentValue; }
+            get { return 30; }
         }
 
         public bool EvadeEnabled
         {
-            get { return EvadeMenu.ControlsMenu["enableEvade"].Cast<KeyBind>().CurrentValue; }
+            get { return true; }
         }
 
         public bool DodgeDangerousOnly
         {
-            get { return EvadeMenu.ControlsMenu["dodgeOnlyDangerous"].Cast<KeyBind>().CurrentValue; }
+            get { return false; }
         }
 
         public int ExtraEvadeRange
         {
-            get { return EvadeMenu.MainMenu["extraEvadeRange"].Cast<Slider>().CurrentValue; }
+            get { return 50; }
         }
 
         public bool RandomizeExtraEvadeRange
         {
-            get { return EvadeMenu.MainMenu["randomizeExtraEvadeRange"].Cast<CheckBox>().CurrentValue; }
+            get { return false; }
         }
 
         public bool AllowRecalculateEvade
         {
-            get { return EvadeMenu.MainMenu["recalculatePosition"].Cast<CheckBox>().CurrentValue; }
+            get { return false; }
         }
 
         public bool RestorePosition
         {
-            get { return EvadeMenu.MainMenu["moveToInitialPosition"].Cast<CheckBox>().CurrentValue; }
+            get { return false; }
         }
 
-        public bool DisableDrawings
+        public bool AlwaysEvade
         {
-            get { return EvadeMenu.DrawMenu["disableAllDrawings"].Cast<CheckBox>().CurrentValue; }
+            get { return true; } //return EvadeMenu.MainMenu["alwaysEvade"].Cast<CheckBox>().CurrentValue;
         }
 
         public bool DrawEvadePoint
         {
-            get { return EvadeMenu.DrawMenu["drawEvadePoint"].Cast<CheckBox>().CurrentValue; }
+            get { return true; }
         }
 
         public bool DrawEvadeStatus
         {
-            get { return EvadeMenu.DrawMenu["drawEvadeStatus"].Cast<CheckBox>().CurrentValue; }
+            get { return false; }
         }
 
         public bool DrawDangerPolygon
         {
-            get { return EvadeMenu.DrawMenu["drawDangerPolygon"].Cast<CheckBox>().CurrentValue; }
+            get { return false; }
         }
 
         public int IssueOrderTickLimit
         {
-            get { return 90; }
+            get { return 200; }
         }
 
         public SkillshotDetector SkillshotDetector { get; private set; }
-        public PathFinding PathFinding { get; private set; }
 
         public EvadeSkillshot[] Skillshots { get; private set; }
         public Geometry.Polygon[] Polygons { get; private set; }
@@ -91,10 +90,9 @@ namespace YasuoHu3Reborn.EvadePlus
 
         public EvadePlus(SkillshotDetector detector)
         {
-            Skillshots = new EvadeSkillshot[] {};
-            Polygons = new Geometry.Polygon[] {};
+            Skillshots = new EvadeSkillshot[] { };
+            Polygons = new Geometry.Polygon[] { };
             ClippedPolygons = new List<Geometry.Polygon>();
-            PathFinding = new PathFinding(this);
             StatusText = new Text("EvadePlus Enabled", new Font("Calisto MT", 10F, FontStyle.Bold));
             StatusTextShadow = new Text("EvadePlus Enabled", new Font("Calisto MT", 10F, FontStyle.Bold));
 
@@ -112,52 +110,25 @@ namespace YasuoHu3Reborn.EvadePlus
         private void OnUpdateSkillshots(EvadeSkillshot skillshot, bool remove, bool isProcessSpell)
         {
             CacheSkillshots();
-            DoEvade();
         }
 
         private void OnSkillshotActivation(EvadeSkillshot skillshot)
         {
             CacheSkillshots();
-            DoEvade();
         }
 
         private void OnSkillshotDetected(EvadeSkillshot skillshot, bool isProcessSpell)
         {
-            //TODO: update
-            if (skillshot.ToPolygon().IsInside(Player.Instance))
-            {
-                LastEvadeResult = null;
-            }
         }
 
         private void OnSkillshotDeleted(EvadeSkillshot skillshot)
         {
-            if (RestorePosition && !SkillshotDetector.DetectedSkillshots.Any())
-            {
-                if (AutoPathing.IsPathing && Player.Instance.Path.Length > 2)
-                {
-                    var destination = AutoPathing.Destination;
-                    AutoPathing.StopPath();
-                    Player.IssueOrder(GameObjectOrder.MoveTo, destination.To3DWorld(), false);
-                }
-                else if (LastEvadeResult != null && Player.Instance.IsMovingTowards(LastEvadeResult.EvadePoint))
-                {
-                    Player.IssueOrder(GameObjectOrder.MoveTo, LastIssueOrderPos.To3DWorld(), false);
-                }
-            }
+
         }
 
         private void Ontick(EventArgs args)
         {
-            if (!Player.Instance.IsWalking() && LastEvadeResult != null)
-            {
-                MoveTo(LastEvadeResult.WalkPoint);
-            }
 
-            if (IsHeroInDanger() && LastEvadeResult == null)
-            {
-                DoEvade();
-            }
         }
 
         private void PlayerOnIssueOrder(Obj_AI_Base sender, PlayerIssueOrderEventArgs args)
@@ -167,83 +138,11 @@ namespace YasuoHu3Reborn.EvadePlus
                 return;
             }
 
-            if (args.Order == GameObjectOrder.AttackUnit)
-            {
-                LastIssueOrderPos =
-                    (Player.Instance.Distance(args.Target, true) >=
-                     Player.Instance.GetAutoAttackRange(args.Target as AttackableUnit).Pow()
-                        ? args.Target.Position
-                        : Player.Instance.Position).To2D();
-            }
-            else
-            {
-                LastIssueOrderPos = (args.Target != null ? args.Target.Position : args.TargetPosition).To2D();
-            }
-
             CacheSkillshots();
-            switch (args.Order)
-            {
-                case GameObjectOrder.Stop:
-                    if (DoEvade(null, args))
-                    {
-                        args.Process = false;
-                    }
-                    break;
-
-                case GameObjectOrder.HoldPosition:
-                    if (DoEvade(null, args))
-                    {
-                        args.Process = false;
-                    }
-                    break;
-
-                case GameObjectOrder.AttackUnit:
-                    if (DoEvade(null, args))
-                    {
-                        args.Process = false;
-                    }
-                    break;
-
-                default:
-                    if (DoEvade(Player.Instance.GetPath(LastIssueOrderPos.To3DWorld(), true), args))
-                    {
-                        args.Process = false;
-                    }
-                    break;
-            }
         }
 
         private void OnDraw(EventArgs args)
         {
-            if (DisableDrawings)
-            {
-                return;
-            }
-
-            if (DrawEvadePoint && LastEvadeResult != null)
-            {
-                if (LastEvadeResult.IsValid && LastEvadeResult.EnoughTime && !LastEvadeResult.Expired())
-                {
-                    Circle.Draw(new ColorBGRA(255, 0, 0, 255), Player.Instance.BoundingRadius, 25,
-                        LastEvadeResult.WalkPoint);
-                }
-            }
-
-            if (DrawEvadeStatus)
-            {
-                StatusText.Color = EvadeEnabled ? Color.White : Color.Red;
-                StatusText.TextValue = "EvadePlus " + (EvadeEnabled ? "Enabled" : "Disabled");
-                StatusText.Position = Player.Instance.Position.WorldToScreen() -
-                                      new Vector2(StatusText.Bounding.Width/2, -20);
-
-                StatusTextShadow.Color = Color.Black;
-                StatusTextShadow.TextValue = StatusText.TextValue;
-                StatusTextShadow.Position = StatusText.Position - new Vector2(1, 1);
-
-                StatusTextShadow.Draw();
-                StatusText.Draw();
-            }
-
             if (DrawDangerPolygon)
             {
                 foreach (
@@ -251,12 +150,12 @@ namespace YasuoHu3Reborn.EvadePlus
                         Geometry.ClipPolygons(SkillshotDetector.ActiveSkillshots.Select(c => c.ToPolygon()))
                             .ToPolygons())
                 {
-                    pol.DrawPolygon(Color.Red, 2);
+                    pol.DrawPolygon(Color.Red, 3);
                 }
             }
         }
 
-        private void CacheSkillshots()
+        public void CacheSkillshots()
         {
             Skillshots =
                 (DodgeDangerousOnly
@@ -341,8 +240,8 @@ namespace YasuoHu3Reborn.EvadePlus
             var playerPos = Player.Instance.ServerPosition.To2D();
             var polygons = ClippedPolygons.Where(p => p.IsInside(playerPos)).ToArray();
             var maxTime = GetTimeAvailable();
-            var time = Math.Max(0, maxTime - (Game.Ping + ServerTimeBuffer));
-            var moveRadius = (0.8F*time/1000F)*Player.Instance.MoveSpeed;
+            var time = Math.Max(0, maxTime - (Game.Ping / 2 + ServerTimeBuffer + 20));
+            var moveRadius = (0.9F * time / 1000F) * Player.Instance.MoveSpeed;
             var segments = new List<Vector2[]>();
 
             foreach (var pol in polygons)
@@ -362,7 +261,7 @@ namespace YasuoHu3Reborn.EvadePlus
                         if (start.Distance(playerPos, true) < moveRadius.Pow() &&
                             end.Distance(playerPos, true) < moveRadius.Pow())
                         {
-                            intersections = new[] {start, end}.ToList();
+                            intersections = new[] { start, end }.ToList();
                         }
                         else
                         {
@@ -382,9 +281,19 @@ namespace YasuoHu3Reborn.EvadePlus
 
             if (!segments.Any()) //not enough time
             {
-                var point = GetClosestPoint(polygons, playerPos);
-                return new EvadeResult(this, point, anchor, maxTime, time,
-                    point.Distance(playerPos, true) <= (moveRadius + 10).Pow());
+                var polPoints =
+                    polygons.Select(pol => pol.ToDetailedPolygon())
+                        .SelectMany(pol => pol.Points)
+                        .OrderByDescending(p => p.Distance(playerPos, true));
+
+                if (polPoints.Any())
+                {
+                    var point = polPoints.Last();
+                    return new EvadeResult(this, point, anchor, maxTime, time,
+                        point.Distance(playerPos, true) <= (moveRadius + 10).Pow());
+                }
+
+                return new EvadeResult(this, playerPos, anchor, maxTime, time, false);
             }
 
             const int maxdist = 1500;
@@ -396,17 +305,17 @@ namespace YasuoHu3Reborn.EvadePlus
                 var dist = segment[0].Distance(segment[1]);
                 if (dist > maxdist)
                 {
-                    segment[0] = segment[0].Extend(segment[1], dist/2 - maxdist/2);
-                    segment[1] = segment[1].Extend(segment[1], dist/2 - maxdist/2);
+                    segment[0] = segment[0].Extend(segment[1], dist / 2 - maxdist / 2);
+                    segment[1] = segment[1].Extend(segment[1], dist / 2 - maxdist / 2);
                     dist = maxdist;
                 }
 
-                var step = maxdist/division;
-                var count = dist/step;
+                var step = maxdist / division;
+                var count = dist / step;
 
                 for (var i = 0; i < count; i++)
                 {
-                    var point = segment[0].Extend(segment[1], i*step);
+                    var point = segment[0].Extend(segment[1], i * step);
                     if (!point.IsWall() &&
                         !Polygons.Where(pol => !pol.IsInside(playerPos))
                             .Any(pol => pol.IsIntersectingWithLineSegment(playerPos, point.Extend(playerPos, -50))) &&
@@ -419,27 +328,15 @@ namespace YasuoHu3Reborn.EvadePlus
 
             if (!points.Any())
             {
-                return new EvadeResult(this, GetClosestPoint(polygons, playerPos), anchor, maxTime, time, true);
+                return new EvadeResult(this, Vector2.Zero, anchor, maxTime, time, true);
             }
 
             var evadePoint = points.OrderByDescending(p => p.Distance(anchor) + p.Distance(playerPos)).Last();
             return new EvadeResult(this, evadePoint, anchor, maxTime, time, true);
         }
 
-        public Vector2 GetClosestPoint(Geometry.Polygon[] polygons, Vector2 from)
-        {
-            var polPoints =
-                polygons.Select(pol => pol.ToDetailedPolygon())
-                    .SelectMany(pol => pol.Points)
-                    .OrderByDescending(p => p.Distance(from, true));
-
-            return !polPoints.Any() ? Vector2.Zero : polPoints.Last();
-        }
-
         public bool IsHeroPathSafe(EvadeResult evade, Vector3[] desiredPath, AIHeroClient hero = null)
         {
-            return false; //temporarily disabled
-
             hero = hero ?? Player.Instance;
 
             var path = (desiredPath ?? hero.RealPath()).ToVector2();
@@ -466,7 +363,7 @@ namespace YasuoHu3Reborn.EvadePlus
             if (points.Count == 1)
             {
                 var walkTime = hero.WalkingTime(points[0]);
-                return walkTime <= evade.TimeAvailable;
+                return walkTime <= evade.TotalTimeAvailable - 130;
             }
 
             return false;
@@ -474,13 +371,13 @@ namespace YasuoHu3Reborn.EvadePlus
 
         public bool MoveTo(Vector2 point, bool limit = true)
         {
-            if (limit && EvadeIssurOrderTime + IssueOrderTickLimit > Environment.TickCount)
-            {
-                return false;
-            }
+            //if (limit && EvadeIssurOrderTime + IssueOrderTickLimit > Environment.TickCount)
+            //{
+            //    return false;
+            //}
 
-            EvadeIssurOrderTime = Environment.TickCount;
             Player.IssueOrder(GameObjectOrder.MoveTo, point.To3DWorld(), false);
+            EvadeIssurOrderTime = Environment.TickCount;
             return true;
         }
 
@@ -489,8 +386,9 @@ namespace YasuoHu3Reborn.EvadePlus
             return MoveTo(point.To2D(), limit);
         }
 
-        public bool DoEvade(Vector3[] desiredPath = null, PlayerIssueOrderEventArgs args = null)
+        public bool DoEvade(Vector3[] desiredPath = null)
         {
+            return false;
             if (!EvadeEnabled || Player.Instance.IsDead)
             {
                 LastEvadeResult = null;
@@ -500,26 +398,18 @@ namespace YasuoHu3Reborn.EvadePlus
 
             var hero = Player.Instance;
 
-            if (args != null && args.Order == GameObjectOrder.AttackUnit)
-            {
-                if (!hero.IsInAutoAttackRange((AttackableUnit) args.Target))
-                {
-                    desiredPath = hero.GetPath(args.Target.Position, true);
-                }
-            }
-
             if (IsHeroInDanger(hero))
             {
                 if (LastEvadeResult != null && (!IsPointSafe(LastEvadeResult.EvadePoint) || LastEvadeResult.Expired()))
                 {
-                   // LastEvadeResult = null;
+                    LastEvadeResult = null;
                 }
 
                 var evade = CalculateEvade(LastIssueOrderPos);
                 if (evade.IsValid && evade.EnoughTime)
                 {
                     if (LastEvadeResult == null ||
-                        (LastEvadeResult.EvadePoint.Distance(evade.EvadePoint, true) > 500.Pow() &&
+                        (LastEvadeResult.EvadePoint.Distance(evade.EvadePoint, true) > 300.Pow() &&
                          AllowRecalculateEvade))
                     {
                         LastEvadeResult = evade;
@@ -529,40 +419,32 @@ namespace YasuoHu3Reborn.EvadePlus
                 {
                     if (!evade.EnoughTime && LastEvadeResult == null && !IsHeroPathSafe(evade, desiredPath))
                     {
-                        return EvadeSpellManager.ProcessFlash(this);
+                        var result = EvadeSpellManager.ProcessFlash(this);
+                        if (!result && AlwaysEvade && evade.IsValid)
+                        {
+                            MoveTo(evade.WalkPoint);
+                        }
+
+                        return result;
                     }
                 }
 
-                if (LastEvadeResult != null)
+                if (LastEvadeResult != null && !IsHeroPathSafe(evade, desiredPath))
                 {
-                    var isPathSafe = IsHeroPathSafe(evade, desiredPath);
-
-                    if (!hero.IsMovingTowards(LastEvadeResult.WalkPoint) || !isPathSafe)
+                    if (!hero.IsMovingTowards(LastEvadeResult.WalkPoint) ||
+                        EvadeIssurOrderTime + IssueOrderTickLimit <= Environment.TickCount)
                     {
                         AutoPathing.StopPath();
                         MoveTo(LastEvadeResult.WalkPoint, false);
                     }
-
-                    return true;  //desiredPath == null || !isPathSafe;
                 }
+
+                return true;
             }
             else if (!IsPathSafe(hero.RealPath()) || (desiredPath != null && !IsPathSafe(desiredPath)))
             {
-                var path = PathFinding.GetPath(hero.Position.To2D(), LastIssueOrderPos);
-                var evade = CalculateEvade(LastIssueOrderPos);
-
-                if (evade.IsValid)
-                {
-                    path = new[] {evade.EvadePoint}.Concat(path).ToArray();
-                }
-
-                if (path.Length > 0 && AutoPathing.Destination.Distance(path.Last(), true) > 50.Pow())
-                {
-                    AutoPathing.DoPath(path);
-                }
-
                 LastEvadeResult = null;
-                return desiredPath != null;
+                return true;
             }
             else
             {
@@ -595,7 +477,7 @@ namespace YasuoHu3Reborn.EvadePlus
             {
                 get
                 {
-                    var walkPoint = EvadePoint.Extend(PlayerPos, -60);
+                    var walkPoint = EvadePoint.Extend(PlayerPos, -120);
                     var newPoint = walkPoint.Extend(PlayerPos, -ExtraRange);
                     if (Evade.IsPointSafe(newPoint))
                     {
@@ -624,7 +506,7 @@ namespace YasuoHu3Reborn.EvadePlus
                 if (Evade.ExtraEvadeRange > 0)
                 {
                     ExtraRange = (Evade.RandomizeExtraEvadeRange
-                        ? Utils.Random.Next(Evade.ExtraEvadeRange/3, Evade.ExtraEvadeRange)
+                        ? Utils.Random.Next(Evade.ExtraEvadeRange / 3, Evade.ExtraEvadeRange)
                         : Evade.ExtraEvadeRange);
                 }
             }

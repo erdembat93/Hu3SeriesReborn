@@ -29,7 +29,7 @@ namespace YasuoHu3Reborn.EvadePlus
 
         #endregion
 
-        public DetectionTeam Detection;
+        public DetectionTeam TeamDetect;
 
         public readonly List<EvadeSkillshot> DetectedSkillshots = new List<EvadeSkillshot>();
 
@@ -40,27 +40,27 @@ namespace YasuoHu3Reborn.EvadePlus
 
         public bool EnableFoWDetection
         {
-            get { return EvadeMenu.MainMenu["fowDetection"].Cast<CheckBox>().CurrentValue; }
+            get { return true; }
         }
 
         public bool LimitDetectionRange
         {
-            get { return EvadeMenu.MainMenu["limitDetectionRange"].Cast<CheckBox>().CurrentValue; }
+            get { return true; }
         }
 
         public int SkillshotActivationDelay
         {
-            get { return EvadeMenu.MainMenu["skillshotActivationDelay"].Cast<Slider>().CurrentValue; }
+            get { return 15; }
         }
 
         public bool EnableSpellDetection
         {
-            get { return EvadeMenu.MainMenu["processSpellDetection"].Cast<CheckBox>().CurrentValue; }
+            get { return true; }
         }
 
-        public SkillshotDetector(DetectionTeam detection = DetectionTeam.EnemyTeam)
+        public SkillshotDetector(DetectionTeam teamDetect = DetectionTeam.EnemyTeam)
         {
-            Detection = detection;
+            TeamDetect = teamDetect;
 
             Game.OnTick += OnTick;
             GameObject.OnCreate += GameObjectOnCreate;
@@ -72,8 +72,8 @@ namespace YasuoHu3Reborn.EvadePlus
 
         public void AddSkillshot(EvadeSkillshot skillshot, bool isProcessSpell = false, bool triggerEvent = true)
         {
-            if (LimitDetectionRange && !skillshot.SpellData.IsGlobal &&
-                skillshot.GetPosition().Distance(Player.Instance, true) > (2*skillshot.SpellData.Range).Pow())
+            if (LimitDetectionRange &&
+                skillshot.GetPosition().Distance(Player.Instance, true) > (2 * skillshot.SpellData.Range).Pow())
             {
                 return;
             }
@@ -98,7 +98,7 @@ namespace YasuoHu3Reborn.EvadePlus
             if (team == GameObjectTeam.Unknown)
                 return true;
 
-            switch (Detection)
+            switch (TeamDetect)
             {
                 case DetectionTeam.AllyTeam:
                     return team.IsAlly();
@@ -117,14 +117,11 @@ namespace YasuoHu3Reborn.EvadePlus
         {
             foreach (var skillshot in DetectedSkillshots.Where(v => !v.IsValid))
             {
-                if (!skillshot.CastComplete)
-                {
-                    if (OnSkillshotDeleted != null)
-                        OnSkillshotDeleted(skillshot);
+                if (OnSkillshotDeleted != null)
+                    OnSkillshotDeleted(skillshot);
 
-                    if (OnUpdateSkillshots != null)
-                        OnUpdateSkillshots(skillshot, true, false);
-                }
+                if (OnUpdateSkillshots != null)
+                    OnUpdateSkillshots(skillshot, true, false);
 
                 skillshot.OnDispose();
             }
@@ -150,8 +147,6 @@ namespace YasuoHu3Reborn.EvadePlus
 
         private void OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            //Chat.Print(args.SData.Name);
-
             if (!EnableSpellDetection)
             {
                 return;
@@ -203,19 +198,17 @@ namespace YasuoHu3Reborn.EvadePlus
                     if (IsValidTeam(nSkillshot.Team) && (EnableFoWDetection || !nSkillshot.IsFromFow()))
                     {
                         var triggerEvent = true;
-                        var missile = (sender as MissileClient);
 
-                        if (missile != null)
+                        if (sender is MissileClient)
                         {
+                            var missile = (sender as MissileClient);
                             var castSkillshot =
                                 DetectedSkillshots.FirstOrDefault(
-                                    c => c.Caster != null && c.Caster.IndexEquals(missile.SpellCaster));
-
+                                    c => c.Caster != null && c.Caster.IdEquals(missile.SpellCaster));
                             if (castSkillshot != null)
                             {
                                 nSkillshot.TimeDetected = castSkillshot.TimeDetected;
                                 nSkillshot.IsActive = castSkillshot.IsActive;
-                                castSkillshot.CastComplete = true;
                                 triggerEvent = false;
                             }
                         }
@@ -236,7 +229,7 @@ namespace YasuoHu3Reborn.EvadePlus
             //    Chat.Print("delete {0} {1} {2} {3}", sender.Team, sender.GetType().ToString(), Utils.GetGameObjectName(sender), sender.Index);
 
             foreach (
-                var c in DetectedSkillshots.Where(v => v.SpawnObject != null && v.SpawnObject.IndexEquals(sender)))
+                var c in DetectedSkillshots.Where(v => v.SpawnObject != null && v.SpawnObject.Index == sender.Index))
             {
                 if (c.OnDelete(sender))
                     c.IsValid = false;
@@ -258,7 +251,7 @@ namespace YasuoHu3Reborn.EvadePlus
                 foreach (
                     var c in
                         DetectedSkillshots.Where(
-                            v => v.SpawnObject == null && v.Caster != null && v.Caster.IndexEquals(sender)))
+                            v => v.SpawnObject == null && v.Caster != null && v.Caster.IdEquals(sender)))
                 {
                     c.IsValid = false;
                 }
@@ -267,11 +260,6 @@ namespace YasuoHu3Reborn.EvadePlus
 
         private void OnDraw(EventArgs args)
         {
-            if (EvadeMenu.DrawMenu["disableAllDrawings"].Cast<CheckBox>().CurrentValue)
-            {
-                return;
-            }
-
             foreach (var c in DetectedSkillshots)
                 if (EvadeMenu.IsSkillshotDrawingEnabled(c))
                     c.OnDraw();

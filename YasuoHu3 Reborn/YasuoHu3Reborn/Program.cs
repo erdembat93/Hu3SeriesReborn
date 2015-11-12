@@ -30,6 +30,9 @@ namespace YasuoHu3Reborn
             DamageIndicator.Initialize(SpellDamage.GetTotalDamage);
 
             Drawing.OnDraw += OnDraw;
+
+            EvadePlus.Program.Initialize();
+            Evader.Init();
         }
 
         private static void OnDraw(EventArgs args)

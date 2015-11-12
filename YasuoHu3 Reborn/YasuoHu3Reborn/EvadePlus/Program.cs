@@ -2,17 +2,17 @@
 
 namespace YasuoHu3Reborn.EvadePlus
 {
-    internal static class Program
+    internal class Program
     {
-        private static SkillshotDetector _skillshotDetector;
-        private static EvadePlus _evade;
+        public static SkillshotDetector _skillshotDetector;
+        public static EvadePlus Evade;
 
         public static void Initialize()
         {
             Loading.OnLoadingComplete += delegate
             {
                 _skillshotDetector = new SkillshotDetector();
-                _evade = new EvadePlus(_skillshotDetector);
+                Evade = new EvadePlus(_skillshotDetector);
                 EvadeMenu.CreateMenu();
             };
         }
