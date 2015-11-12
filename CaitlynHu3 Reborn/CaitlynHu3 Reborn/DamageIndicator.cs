@@ -4,6 +4,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using SharpDX;
 using Color = System.Drawing.Color;
+
 using Settings = CaitlynHu3Reborn.Config.Modes.Draw;
 
 namespace CaitlynHu3Reborn
@@ -20,7 +21,6 @@ namespace CaitlynHu3Reborn
         private static readonly Vector2 BarOffset = new Vector2(-9, 11);
 
         private static Color _drawingColor;
-
         public static Color DrawingColor
         {
             get { return _drawingColor; }
@@ -32,10 +32,12 @@ namespace CaitlynHu3Reborn
 
         public static void Initialize(DamageToUnitDelegate damageToUnit)
         {
+            // Apply needed field delegate for damage calculation
             DamageToUnit = damageToUnit;
             DrawingColor = Settings.colorHealth;
             HealthbarEnabled = Settings.DrawHealth;
 
+            // Register event handlers
             Drawing.OnEndScene += OnEndScene;
         }
 
@@ -57,22 +59,13 @@ namespace CaitlynHu3Reborn
                     if (HealthbarEnabled)
                     {
                         // Get remaining HP after damage applied in percent and the current percent of health
-                        var damagePercentage = ((unit.TotalShieldHealth() - damage) > 0
-                            ? (unit.TotalShieldHealth() - damage)
-                            : 0)/
+                        var damagePercentage = ((unit.TotalShieldHealth() - damage) > 0 ? (unit.TotalShieldHealth() - damage) : 0) /
                                                (unit.MaxHealth + unit.AllShield + unit.AttackShield + unit.MagicShield);
-                        var currentHealthPercentage = unit.TotalShieldHealth()/
-                                                      (unit.MaxHealth + unit.AllShield + unit.AttackShield +
-                                                       unit.MagicShield);
+                        var currentHealthPercentage = unit.TotalShieldHealth() / (unit.MaxHealth + unit.AllShield + unit.AttackShield + unit.MagicShield);
 
                         // Calculate start and end point of the bar indicator
-                        var startPoint =
-                            new Vector2((int) (unit.HPBarPosition.X + BarOffset.X + damagePercentage*BarWidth),
-                                (int) (unit.HPBarPosition.Y + BarOffset.Y) - 5);
-                        var endPoint =
-                            new Vector2(
-                                (int) (unit.HPBarPosition.X + BarOffset.X + currentHealthPercentage*BarWidth) + 1,
-                                (int) (unit.HPBarPosition.Y + BarOffset.Y) - 5);
+                        var startPoint = new Vector2((int)(unit.HPBarPosition.X + BarOffset.X + damagePercentage * BarWidth), (int)(unit.HPBarPosition.Y + BarOffset.Y) - 5);
+                        var endPoint = new Vector2((int)(unit.HPBarPosition.X + BarOffset.X + currentHealthPercentage * BarWidth) + 1, (int)(unit.HPBarPosition.Y + BarOffset.Y) - 5);
 
                         // Draw the line
                         Drawing.DrawLine(startPoint, endPoint, LineThickness, DrawingColor);
@@ -81,8 +74,7 @@ namespace CaitlynHu3Reborn
                     if (PercentEnabled)
                     {
                         // Get damage in percent and draw next to the health bar
-                        Drawing.DrawText(unit.HPBarPosition, Color.MediumVioletRed,
-                            string.Concat(Math.Ceiling((damage/unit.TotalShieldHealth())*100), "%"), 10);
+                        Drawing.DrawText(unit.HPBarPosition, Color.MediumVioletRed, string.Concat(Math.Ceiling((damage / unit.TotalShieldHealth()) * 100), "%"), 10);
                     }
                 }
             }

@@ -1,5 +1,4 @@
-﻿using System;
-using EloBuddy;
+﻿using EloBuddy;
 using EloBuddy.SDK;
 
 using Settings = CaitlynHu3Reborn.Config.Modes.Combo;
