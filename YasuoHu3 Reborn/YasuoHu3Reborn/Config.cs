@@ -331,6 +331,8 @@ namespace YasuoHu3Reborn
                 {
                     DrawMenu.AddGroupLabel("Draw");
                     _drawReady = DrawMenu.Add("drawReady", new CheckBox("Draw Only If The Spells Are Ready.", false));
+                    DrawMenu.AddSeparator();
+                    DrawMenu.AddLabel("Reload is required to aply the changes made in the damage indicator");
                     _drawHealth = DrawMenu.Add("drawHealth", new CheckBox("Draw Damage in HealthBar"));
                     DrawMenu.AddColorItem("colorHealth");
                     DrawMenu.AddSeparator();

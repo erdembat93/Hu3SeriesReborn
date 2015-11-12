@@ -11,7 +11,7 @@ namespace AddonTemplate
 {
     public static class Config
     {
-        private const string MenuName = "CorkiHu3 2.0";
+        private const string MenuName = "CorkiHu3 Reborn";
 
         private static readonly Menu Menu;
 
@@ -19,7 +19,7 @@ namespace AddonTemplate
         {
             // Initialize the menu
             Menu = MainMenu.AddMenu(MenuName, MenuName.ToLower());
-            Menu.AddGroupLabel("CorkiHu3 2.0");
+            Menu.AddGroupLabel("CorkiHu3 Reborn");
             Menu.AddLabel("Made By: MarioGK", 50);
 
             // Initialize the modes
@@ -318,6 +318,8 @@ namespace AddonTemplate
                 {
                     DrawMenu.AddGroupLabel("Draw");
                     _drawReady = DrawMenu.Add("drawReady", new CheckBox("Draw Only If The Spells Are Ready.", false));
+                    DrawMenu.AddSeparator();
+                    DrawMenu.AddLabel("Reload is required to aply the changes made in the damage indicator");
                     _drawHealth = DrawMenu.Add("drawHealth", new CheckBox("Draw Damage in HealthBar"));
                     DrawMenu.AddColorItem("colorHealth");
                     DrawMenu.AddSeparator();
