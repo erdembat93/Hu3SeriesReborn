@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
+using SharpDX.Direct3D9;
 using Settings = YasuoHu3Reborn.Config.Modes.Misc;
 
 namespace YasuoHu3Reborn.Modes
@@ -14,6 +15,14 @@ namespace YasuoHu3Reborn.Modes
 
         public override void Execute()
         {
+            Orbwalker.MoveTo(Game.CursorPos);
+
+            var minion =
+                EntityManager.MinionsAndMonsters.EnemyMinions.OrderByDescending(m => m.Health).FirstOrDefault(
+                    m => m.IsValidTarget(Player.Instance.AttackRange));
+
+            Player.IssueOrder(GameObjectOrder.AttackUnit, minion);
+
             if (SpellManager.E.IsReady())
             {
                 var minionE =
