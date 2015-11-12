@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using AddonTemplate.Modes;
+using CaitlynHu3Reborn.Modes;
 using EloBuddy;
 using EloBuddy.SDK.Enumerations;
 using EloBuddy.SDK.Utils;
 
-namespace AddonTemplate
+namespace CaitlynHu3Reborn
 {
     public static class ModeManager
     {

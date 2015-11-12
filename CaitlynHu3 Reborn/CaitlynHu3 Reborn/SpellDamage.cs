@@ -1,7 +1,7 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
 
-namespace AddonTemplate
+namespace CaitlynHu3Reborn
 {
     public static class SpellDamage
     {

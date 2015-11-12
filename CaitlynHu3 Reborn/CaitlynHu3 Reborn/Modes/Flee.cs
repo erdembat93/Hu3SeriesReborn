@@ -1,7 +1,7 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
 
-namespace AddonTemplate.Modes
+namespace CaitlynHu3Reborn.Modes
 {
     public sealed class Flee : ModeBase
     {

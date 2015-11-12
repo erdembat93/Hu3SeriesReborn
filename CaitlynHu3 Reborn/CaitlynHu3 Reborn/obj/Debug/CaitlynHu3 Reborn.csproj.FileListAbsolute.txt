@@ -1,11 +1,11 @@
-C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\bin\Debug\AddonTemplate.exe.config
 C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\obj\Debug\CaitlynHu3 Reborn.csprojResolveAssemblyReference.cache
-C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\bin\Debug\AddonTemplate.exe
-C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\bin\Debug\AddonTemplate.pdb
 C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\bin\Debug\EloBuddy.dll
 C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\bin\Debug\EloBuddy.SDK.dll
 C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\bin\Debug\SharpDX.Direct3D9.dll
 C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\bin\Debug\SharpDX.dll
 C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\bin\Debug\Newtonsoft.Json.dll
-C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\obj\Debug\AddonTemplate.exe
-C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\obj\Debug\AddonTemplate.pdb
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\bin\Debug\CaitlynHu3Reborn.exe.config
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\bin\Debug\CaitlynHu3Reborn.exe
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\bin\Debug\CaitlynHu3Reborn.pdb
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\obj\Debug\CaitlynHu3Reborn.exe
+C:\Users\MarioGK\Documents\GitHub\Hu3SeriesReborn\CaitlynHu3 Reborn\CaitlynHu3 Reborn\obj\Debug\CaitlynHu3Reborn.pdb

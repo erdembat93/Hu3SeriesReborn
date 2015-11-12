@@ -3,7 +3,7 @@ using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace AddonTemplate
+namespace CaitlynHu3Reborn
 {
     public static class Extensions
     {
@@ -50,11 +50,6 @@ namespace AddonTemplate
                                            b.Type == BuffType.Stun ||
                                            b.Type == BuffType.Suppression ||
                                            b.Type == BuffType.Snare)).Aggregate(0f, (current, buff) => Math.Max(current, buff.EndTime)) - Game.Time) * 1000;
-        }
-
-        public static bool IsPassiveReady(this AIHeroClient target)
-        {
-            return target.IsMe && target.HasBuff("XerathAscended2OnHit");
         }
     }
 }

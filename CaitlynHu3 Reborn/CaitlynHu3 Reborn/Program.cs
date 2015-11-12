@@ -2,11 +2,10 @@
 using EloBuddy;
 using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Rendering;
-using Color = System.Drawing.Color;
-using Settings = AddonTemplate.Config.Modes.Draw;
+using Settings = CaitlynHu3Reborn.Config.Modes.Draw;
 
 
-namespace AddonTemplate
+namespace CaitlynHu3Reborn
 {
     public static class Program
     {

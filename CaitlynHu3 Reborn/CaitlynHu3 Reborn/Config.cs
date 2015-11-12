@@ -7,11 +7,11 @@ using Color = System.Drawing.Color;
 // ReSharper disable InconsistentNaming
 // ReSharper disable MemberHidesStaticFromOuterClass
 
-namespace AddonTemplate
+namespace CaitlynHu3Reborn
 {
     public static class Config
     {
-        private const string MenuName = "Caitlyn 2.0";
+        private const string MenuName = "CaitlynHu3 Reborn";
 
         private static readonly Menu Menu;
 
@@ -19,7 +19,7 @@ namespace AddonTemplate
         {
             // Initialize the menu
             Menu = MainMenu.AddMenu(MenuName, MenuName.ToLower());
-            Menu.AddGroupLabel("Caitlyn 2.0");
+            Menu.AddGroupLabel("CaitlynHu3 Reborn");
             Menu.AddLabel("Made By: MarioGK", 50);
 
             // Initialize the modes

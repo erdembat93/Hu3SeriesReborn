@@ -1,8 +1,8 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
-using Settings = AddonTemplate.Config.Modes.Harass;
+using Settings = CaitlynHu3Reborn.Config.Modes.Harass;
 
-namespace AddonTemplate.Modes
+namespace CaitlynHu3Reborn.Modes
 {
     public sealed class Harass : ModeBase
     {
@@ -18,7 +18,7 @@ namespace AddonTemplate.Modes
 
             if (Settings.UseQ && Q.IsReady() && target.IsValidTarget(Q.Range))
             {
-                Q.Cast();
+                Q.Cast(target);
             }
         }
     }

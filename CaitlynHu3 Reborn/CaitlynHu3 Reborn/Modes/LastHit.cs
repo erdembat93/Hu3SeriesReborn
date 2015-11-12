@@ -2,9 +2,9 @@
 using EloBuddy;
 using EloBuddy.SDK;
 
-using Settings = AddonTemplate.Config.Modes.LastHit;
+using Settings = CaitlynHu3Reborn.Config.Modes.LastHit;
 
-namespace AddonTemplate.Modes
+namespace CaitlynHu3Reborn.Modes
 {
     public sealed class LastHit : ModeBase
     {

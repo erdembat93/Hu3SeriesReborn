@@ -2,9 +2,9 @@
 using EloBuddy;
 using EloBuddy.SDK;
 
-using Settings = AddonTemplate.Config.Modes.Combo;
+using Settings = CaitlynHu3Reborn.Config.Modes.Combo;
 
-namespace AddonTemplate.Modes
+namespace CaitlynHu3Reborn.Modes
 {
     public sealed class Combo : ModeBase
     {
@@ -21,7 +21,7 @@ namespace AddonTemplate.Modes
             if (Settings.UseQ && Q.IsReady() && !target.IsInRange(Player.Instance, Player.Instance.AttackRange) &&
                 target.IsValidTarget(Q.Range))
             {
-                Q.Cast();
+                Q.Cast(target);
             }
         }
     }

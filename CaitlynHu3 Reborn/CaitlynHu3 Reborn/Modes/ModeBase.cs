@@ -1,6 +1,6 @@
 ﻿using EloBuddy.SDK;
 
-namespace AddonTemplate.Modes
+namespace CaitlynHu3Reborn.Modes
 {
     public abstract class ModeBase
     {

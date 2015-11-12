@@ -1,9 +1,10 @@
 ﻿using System.Linq;
+using EloBuddy;
 using EloBuddy.SDK;
 
-using Settings = AddonTemplate.Config.Modes.LaneClear;
+using Settings = CaitlynHu3Reborn.Config.Modes.LaneClear;
 
-namespace AddonTemplate.Modes
+namespace CaitlynHu3Reborn.Modes
 {
     public sealed class LaneClear : ModeBase
     {
@@ -14,12 +15,15 @@ namespace AddonTemplate.Modes
 
         public override void Execute()
         {
-            var minion = EntityManager.MinionsAndMonsters.GetLaneMinions().FirstOrDefault(m => m.IsValidTarget(Q.Range));
-            if (minion == null) return;
+            var minions =
+                EntityManager.MinionsAndMonsters.GetLaneMinions(EntityManager.UnitTeam.Enemy,
+                    Player.Instance.ServerPosition, Q.Range, false).ToArray();
+            if (minions.Length == 0) return;
 
-            if (Q.IsReady() && Settings.UseQ && minion.IsValidTarget(Q.Range))
+            var farmLocation = EntityManager.MinionsAndMonsters.GetLineFarmLocation(minions, Q.Width, (int) Q.Range);
+            if (farmLocation.HitNumber >= 4)
             {
-                Q.Cast(minion);
+                Q.Cast(farmLocation.CastPosition);
             }
         }
     }

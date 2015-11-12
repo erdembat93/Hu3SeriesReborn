@@ -3,7 +3,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using Color = System.Drawing.Color;
 
-namespace AddonTemplate
+namespace CaitlynHu3Reborn
 {
     public static class ColorMenu
     {
