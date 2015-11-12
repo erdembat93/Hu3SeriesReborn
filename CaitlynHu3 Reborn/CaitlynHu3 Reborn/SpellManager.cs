@@ -13,9 +13,9 @@ namespace AddonTemplate
 
         static SpellManager()
         {
-            Q = new Spell.Skillshot(SpellSlot.Q, 1230, SkillShotType.Linear, 450, );
-            W = new Spell.Skillshot(SpellSlot.W, 800);
-            E = new Spell.Skillshot(SpellSlot.E, 950);
+            Q = new Spell.Skillshot(SpellSlot.Q, 1230, SkillShotType.Linear, 350, 2000, 60);
+            W = new Spell.Skillshot(SpellSlot.W, 800, SkillShotType.Circular, 350, int.MaxValue, 20);
+            E = new Spell.Skillshot(SpellSlot.E, 950, SkillShotType.Linear, 1600, 80);
             R = new Spell.Targeted(SpellSlot.R, 2000);
         }
 
