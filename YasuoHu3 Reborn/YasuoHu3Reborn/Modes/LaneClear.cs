@@ -18,10 +18,11 @@ namespace YasuoHu3Reborn.Modes
             if (Settings.UseQ && Settings.UseE && SpellManager.Q.IsReady() && SpellManager.E.IsReady())
             {
                 var minionQe =
-                    EntityManager.MinionsAndMonsters.EnemyMinions
+                    EntityManager.MinionsAndMonsters.EnemyMinions.OrderByDescending(m => m.Health)
                         .FirstOrDefault(
                             m =>
-                                m.IsEnemy && m.IsValidTarget(SpellManager.Q.Range) && m.CanE() && (m.Health <= (SpellDamage.EDamage(m) + SpellDamage.QDamage(m))));
+                                m.IsEnemy && m.IsValidTarget(SpellManager.Q.Range) && m.CanE() &&
+                                (m.Health <= (SpellDamage.EDamage(m) + SpellDamage.QDamage(m))));
                 if (minionQe != null)
                 {
                     SpellManager.Q.Cast(minionQe);
@@ -31,7 +32,7 @@ namespace YasuoHu3Reborn.Modes
             if (Settings.UseE && SpellManager.E.IsReady())
             {
                 var minionE =
-                    EntityManager.MinionsAndMonsters.EnemyMinions
+                    EntityManager.MinionsAndMonsters.EnemyMinions.OrderByDescending(m => m.Health)
                         .FirstOrDefault(m => m.IsEnemy && m.IsValidTarget(SpellManager.E.Range)
                                              && (m.Health <= SpellDamage.EDamage(m)));
 
@@ -44,7 +45,7 @@ namespace YasuoHu3Reborn.Modes
             if (Settings.UseQ && SpellManager.Q.IsReady() && !Player.Instance.HasQ3())
             {
                 var minionQ =
-                    EntityManager.MinionsAndMonsters.EnemyMinions
+                    EntityManager.MinionsAndMonsters.EnemyMinions.OrderByDescending(m => m.Health)
                         .FirstOrDefault(m => m.IsEnemy && m.IsValidTarget(SpellManager.Q.Range)
                                              && m.Health <= SpellDamage.QDamage(m));
                 if (minionQ != null)
@@ -57,7 +58,7 @@ namespace YasuoHu3Reborn.Modes
             if (Settings.UseQ3 && Player.Instance.HasQ3() && SpellManager.Q.IsReady())
             {
                 var minionQ3 =
-                    EntityManager.MinionsAndMonsters.EnemyMinions
+                    EntityManager.MinionsAndMonsters.EnemyMinions.OrderByDescending(m => m.Health)
                         .FirstOrDefault(m => m.IsEnemy && m.IsValidTarget(SpellManager.Q.Range)
                                              && m.Health <= SpellDamage.QDamage(m));
                 if (minionQ3 != null)
@@ -70,7 +71,7 @@ namespace YasuoHu3Reborn.Modes
             if (Player.Instance.IsDashing() && Settings.UseQ && SpellManager.Q.IsReady() && !Player.Instance.HasQ3())
             {
                 var minionQ =
-                    EntityManager.MinionsAndMonsters.EnemyMinions.FirstOrDefault(
+                    EntityManager.MinionsAndMonsters.EnemyMinions.OrderByDescending(m => m.Health).FirstOrDefault(
                         m =>
                             m.IsEnemy && m.IsInRange(m.GetAfterEPos(), Q.Range) && m.Health <= SpellDamage.QDamage(m));
                 if (minionQ != null)

@@ -17,7 +17,7 @@ namespace YasuoHu3Reborn.Modes
             if (SpellManager.E.IsReady())
             {
                 var minionE =
-                    EntityManager.MinionsAndMonsters.EnemyMinions
+                    EntityManager.MinionsAndMonsters.EnemyMinions.OrderByDescending(m => m.Health)
                         .FirstOrDefault(m => m.IsEnemy && m.IsValidTarget(SpellManager.E.Range));
 
                 if (minionE != null && !minionE.GetAfterEPos().Tower())
@@ -29,7 +29,7 @@ namespace YasuoHu3Reborn.Modes
             if (SpellManager.Q.IsReady() && !Player.Instance.HasQ3())
             {
                 var minionQ =
-                    EntityManager.MinionsAndMonsters.EnemyMinions
+                    EntityManager.MinionsAndMonsters.EnemyMinions.OrderByDescending(m => m.Health)
                         .FirstOrDefault(m => m.IsEnemy && m.IsValidTarget(SpellManager.Q.Range));
                 if (minionQ != null)
                 {
