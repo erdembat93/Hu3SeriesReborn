@@ -165,7 +165,7 @@ namespace AddonTemplate
                     ModesMenu.AddGroupLabel("LaneClear");
                     _useQ = ModesMenu.Add("laneQ", new CheckBox("Use Q"));
                     _useW = ModesMenu.Add("laneW", new CheckBox("Use W"));
-                    _manaLane = ModesMenu.Add("laneW", new Slider("Min Mana to laneclear", 30));
+                    _manaLane = ModesMenu.Add("laneMana", new Slider("Min Mana to laneclear", 30));
                 }
 
                 public static void Initialize()
@@ -193,7 +193,7 @@ namespace AddonTemplate
                     // Initialize the menu values
                     ModesMenu.AddGroupLabel("LastHit");
                     _useQ = ModesMenu.Add("lastQ", new CheckBox("Use Q"));
-                    _manaLast = ModesMenu.Add("laneW", new Slider("Min Mana to laneclear", 40));
+                    _manaLast = ModesMenu.Add("lastMana", new Slider("Min Mana to lasthit", 40));
                 }
 
                 public static void Initialize()

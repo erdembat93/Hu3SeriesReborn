@@ -21,7 +21,7 @@ namespace AddonTemplate.Modes
             var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
             if (target == null || target.IsZombie || target.HasUndyingBuff()) return;
 
-            if (Q.IsReady() && Settings.UseQ && target.IsValidTarget(Q.Range))
+            if (Q.IsReady() && Settings.UseQ && target.IsValidTarget(Q.Range) && !target.IsInRange(Player.Instance, Player.Instance.AttackRange))
             {
                 Q.Cast(target);
             }
