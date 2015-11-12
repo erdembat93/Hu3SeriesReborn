@@ -14,7 +14,7 @@ namespace AddonTemplate
         static SpellManager()
         {
             Q = new Spell.Targeted(SpellSlot.Q, 650);
-            W = new Spell.Active(SpellSlot.W, (uint)Player.Instance.AttackRange);
+            W = new Spell.Active(SpellSlot.W, (uint)Player.Instance.AttackRange + (uint)Player.Instance.BoundingRadius);
             E = new Spell.Targeted(SpellSlot.E, 425);
             R = new Spell.Skillshot(SpellSlot.R, 1000, SkillShotType.Linear, 500, 1600, 120);
         }

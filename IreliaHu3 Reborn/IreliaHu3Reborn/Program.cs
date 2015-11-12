@@ -12,7 +12,7 @@ namespace AddonTemplate
     public static class Program
     {
         // ReSharper disable once MemberCanBePrivate.Global
-        public const string ChampName = "Caitlyn";
+        public const string ChampName = "Irelia";
 
         public static bool CanW;
 

@@ -11,7 +11,7 @@ namespace AddonTemplate
 {
     public static class Config
     {
-        private const string MenuName = "AddonTemplate";
+        private const string MenuName = "IreliaHu3 Reborn";
 
         private static readonly Menu Menu;
 
@@ -19,7 +19,7 @@ namespace AddonTemplate
         {
             // Initialize the menu
             Menu = MainMenu.AddMenu(MenuName, MenuName.ToLower());
-            Menu.AddGroupLabel("AddonTemplate");
+            Menu.AddGroupLabel("IreliaHu3 Reborn");
             Menu.AddLabel("Made By: MarioGK", 50);
 
             // Initialize the modes

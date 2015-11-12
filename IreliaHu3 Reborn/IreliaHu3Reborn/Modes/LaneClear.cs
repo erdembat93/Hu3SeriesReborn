@@ -19,7 +19,7 @@ namespace AddonTemplate.Modes
             {
                 var minionq =
                     EntityManager.MinionsAndMonsters.EnemyMinions.FirstOrDefault(
-                        m => m.IsValidTarget(Q.Range) && m.Health < SpellDamage.GetRealDamage(SpellSlot.Q, m));
+                        m => m.IsValidTarget(Q.Range) && m.Health <= SpellDamage.GetRealDamage(SpellSlot.Q, m));
 
                 if (minionq != null)
                 {
@@ -31,7 +31,7 @@ namespace AddonTemplate.Modes
             {
                 var minionw =
                    EntityManager.MinionsAndMonsters.EnemyMinions.FirstOrDefault(
-                       m => m.IsValidTarget(Player.Instance.AttackRange));
+                       m => m.IsValidTarget(Player.Instance.AttackRange + Player.Instance.BoundingRadius));
 
                 if (minionw != null)
                 {

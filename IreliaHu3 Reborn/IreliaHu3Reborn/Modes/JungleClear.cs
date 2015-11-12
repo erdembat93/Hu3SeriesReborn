@@ -18,7 +18,7 @@ namespace AddonTemplate.Modes
             if (Q.IsReady() && Settings.UseQ)
             {
                 var minionq =
-                    EntityManager.MinionsAndMonsters.EnemyMinions.FirstOrDefault(
+                    EntityManager.MinionsAndMonsters.GetJungleMonsters().FirstOrDefault(
                         m => m.IsValidTarget(Q.Range));
 
                 if (minionq != null)
