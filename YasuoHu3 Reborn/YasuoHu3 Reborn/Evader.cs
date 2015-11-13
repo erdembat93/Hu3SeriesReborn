@@ -110,7 +110,7 @@ namespace YasuoHu3Reborn
                             EntityManager.MinionsAndMonsters.EnemyMinions.Where(
                                 a => a.Team != Player.Instance.Team && a.Distance(Player.Instance) < 475 && a.CanE()))
                     {
-                        if(source.GetAfterEPos().IsUnderTower()) continue;
+                        if(source.GetAfterEPos().Tower()) continue;
                         if (EvadePlus.Program.Evade.IsPointSafe(source.GetAfterEPos().To2D()))
                         {
                             int count = 0;
@@ -131,7 +131,7 @@ namespace YasuoHu3Reborn
                             EntityManager.Heroes.Enemies.Where(
                                 a => a.IsEnemy && a.Distance(Player.Instance) < 475 && a.CanE()))
                     {
-                        if (source.GetAfterEPos().IsUnderTower()) continue;
+                        if (source.GetAfterEPos().Tower()) continue;
                         if (EvadePlus.Program.Evade.IsPointSafe(source.GetAfterEPos().To2D()))
                         {
                             int count = 0;

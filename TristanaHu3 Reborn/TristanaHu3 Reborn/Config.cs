@@ -45,8 +45,6 @@ namespace TristanaHu3Reborn
                 Menu.AddSeparator();
                 LaneClear.Initialize();
                 Menu.AddSeparator();
-                LastHit.Initialize();
-                Menu.AddSeparator();
                 Misc.Initialize();
 
                 DrawMenu = Menu.AddSubMenu("Draw");
@@ -62,6 +60,8 @@ namespace TristanaHu3Reborn
                 private static readonly CheckBox _useQ;
                 private static readonly CheckBox _useW;
                 private static readonly CheckBox _useE;
+                private static readonly CheckBox _useR;
+                private static readonly CheckBox _useRtower;
 
                 public static bool UseQ
                 {
@@ -78,6 +78,16 @@ namespace TristanaHu3Reborn
                     get { return _useE.CurrentValue; }
                 }
 
+                public static bool UseR
+                {
+                    get { return _useR.CurrentValue; }
+                }
+
+
+                public static bool UseRTower
+                {
+                    get { return _useRtower.CurrentValue; }
+                }
                 static Combo()
                 {
                     // Initialize the menu values
@@ -85,6 +95,8 @@ namespace TristanaHu3Reborn
                     _useQ = ModesMenu.Add("comboQ", new CheckBox("Use Q"));
                     _useW = ModesMenu.Add("comboW", new CheckBox("Use W"));
                     _useE = ModesMenu.Add("comboE", new CheckBox("Use E"));
+                    _useR = ModesMenu.Add("comboR", new CheckBox("Use R to kill"));
+                    _useRtower = ModesMenu.Add("comboRtower", new CheckBox("Use R to throw the enemy under ally tower"));
                 }
 
                 public static void Initialize()
@@ -153,6 +165,8 @@ namespace TristanaHu3Reborn
                 private static readonly CheckBox _enemies;
                 private static readonly CheckBox _Rint;
                 private static readonly CheckBox _Rgap;
+                private static readonly CheckBox _fleeW;
+                private static readonly CheckBox _fleeR;
                 
                 public static bool Enemies
                 {
@@ -169,6 +183,16 @@ namespace TristanaHu3Reborn
                     get { return _Rgap.CurrentValue; }
                 }
 
+                public static bool UseWFlee
+                {
+                    get { return _fleeW.CurrentValue; }
+                }
+
+                public static bool UseRFlee
+                {
+                    get { return _fleeR.CurrentValue; }
+                }
+
                 static Misc()
                 {
                     // Initialize the menu values
@@ -182,6 +206,9 @@ namespace TristanaHu3Reborn
                     ModesMenu.AddGroupLabel("Interrupt/Gapcloser");
                     _Rint = ModesMenu.Add("rint", new CheckBox("Use R On Interruptable Spell"));
                     _Rgap = ModesMenu.Add("rgap", new CheckBox("Use R On GapCloser"));
+                    ModesMenu.AddGroupLabel("Flee");
+                    _Rint = ModesMenu.Add("_fleeW", new CheckBox("Use W to flee"));
+                    _Rgap = ModesMenu.Add("_fleeR", new CheckBox("Use R when you`re low health"));
                 }
 
                 public static void Initialize()

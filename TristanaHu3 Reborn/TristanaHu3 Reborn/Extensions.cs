@@ -2,6 +2,7 @@
 using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
+using SharpDX;
 
 namespace TristanaHu3Reborn
 {
@@ -55,6 +56,21 @@ namespace TristanaHu3Reborn
         public static bool IsPassiveReady(this AIHeroClient target)
         {
             return target.IsMe && target.HasBuff("XerathAscended2OnHit");
+        }
+
+        public static bool Tower(this Vector3 pos)
+        {
+            return EntityManager.Turrets.Enemies.Where(t => !t.IsDead).Any(d => d.Distance(pos) < 950);
+        }
+
+        public static bool AllyTower(this Vector3 pos)
+        {
+            return EntityManager.Turrets.Allies.Where(t => !t.IsDead).Any(d => d.Distance(pos) < 950);
+        }
+
+        public static Vector3 GetAfterRPos(this Obj_AI_Base unit)
+        {
+            return unit.Position.Extend(Prediction.Position.PredictUnitPosition(unit, 250), 350).To3D();
         }
     }
 }

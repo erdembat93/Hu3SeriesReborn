@@ -73,11 +73,6 @@ namespace YasuoHu3Reborn
             return unit.HasBuffOfType(BuffType.Knockback) || unit.HasBuffOfType(BuffType.Knockup);
         }
 
-        public static bool IsUnderTower(this Vector3 v)
-        {
-            return EntityManager.Turrets.Enemies.Where(a => a.Health > 0 && !a.IsDead).Any(a => a.Distance(v) < 950);
-        }
-
         public static bool Tower(this Vector3 pos)
         {
             return EntityManager.Turrets.Enemies.Where(t => !t.IsDead).Any(d => d.Distance(pos) < 950);

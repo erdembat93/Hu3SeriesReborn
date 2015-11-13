@@ -1,6 +1,8 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
 
+using Settings = TristanaHu3Reborn.Config.Modes.Combo;
+
 namespace TristanaHu3Reborn.Modes
 {
     public sealed class PermaActive : ModeBase
@@ -15,7 +17,7 @@ namespace TristanaHu3Reborn.Modes
             var target = TargetSelector.GetTarget(R.Range, DamageType.Physical);
             if (target == null || target.IsZombie || target.HasUndyingBuff()) return;
 
-            if (R.IsReady())
+            if (R.IsReady() && Settings.UseR)
             {
                 var stacks = target.GetBuffCount("tristanaecharge");
                 if (stacks >= 1)
@@ -25,6 +27,14 @@ namespace TristanaHu3Reborn.Modes
                     {
                         R.Cast(target);
                     }
+                }
+            }
+
+            if (R.IsReady() && Settings.UseRTower)
+            {
+                if (target.GetAfterRPos().AllyTower())
+                {
+                    R.Cast(target);
                 }
             }
         }
