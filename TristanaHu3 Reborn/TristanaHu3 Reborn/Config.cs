@@ -62,7 +62,6 @@ namespace TristanaHu3Reborn
                 private static readonly CheckBox _useQ;
                 private static readonly CheckBox _useW;
                 private static readonly CheckBox _useE;
-                private static readonly CheckBox _useR;
 
                 public static bool UseQ
                 {
@@ -79,11 +78,6 @@ namespace TristanaHu3Reborn
                     get { return _useE.CurrentValue; }
                 }
 
-                public static bool UseR
-                {
-                    get { return _useR.CurrentValue; }
-                }
-
                 static Combo()
                 {
                     // Initialize the menu values
@@ -91,7 +85,6 @@ namespace TristanaHu3Reborn
                     _useQ = ModesMenu.Add("comboQ", new CheckBox("Use Q"));
                     _useW = ModesMenu.Add("comboW", new CheckBox("Use W"));
                     _useE = ModesMenu.Add("comboE", new CheckBox("Use E"));
-                    _useR = ModesMenu.Add("comboR", new CheckBox("Use R", false)); // Default false
                 }
 
                 public static void Initialize()
@@ -102,17 +95,11 @@ namespace TristanaHu3Reborn
             public static class Harass
             {
                 private static readonly CheckBox _useQ;
-                private static readonly CheckBox _useW;
                 private static readonly CheckBox _useE;
 
                 public static bool UseQ
                 {
                     get { return _useQ.CurrentValue; }
-                }
-
-                public static bool UseW
-                {
-                    get { return _useW.CurrentValue; }
                 }
 
                 public static bool UseE
@@ -125,7 +112,6 @@ namespace TristanaHu3Reborn
                     // Initialize the menu values
                     ModesMenu.AddGroupLabel("Harass");
                     _useQ = ModesMenu.Add("harassQ", new CheckBox("Use Q"));
-                    _useW = ModesMenu.Add("harassW", new CheckBox("Use W"));
                     _useE = ModesMenu.Add("harassE", new CheckBox("Use E"));
                 }
 
@@ -137,28 +123,16 @@ namespace TristanaHu3Reborn
             public static class LaneClear
             {
                 private static readonly CheckBox _useQ;
-                private static readonly CheckBox _useW;
                 private static readonly CheckBox _useE;
-                private static readonly CheckBox _useR;
 
                 public static bool UseQ
                 {
                     get { return _useQ.CurrentValue; }
                 }
 
-                public static bool UseW
-                {
-                    get { return _useW.CurrentValue; }
-                }
-
                 public static bool UseE
                 {
                     get { return _useE.CurrentValue; }
-                }
-
-                public static bool UseR
-                {
-                    get { return _useR.CurrentValue; }
                 }
 
                 static LaneClear()
@@ -166,51 +140,7 @@ namespace TristanaHu3Reborn
                     // Initialize the menu values
                     ModesMenu.AddGroupLabel("LaneClear");
                     _useQ = ModesMenu.Add("laneQ", new CheckBox("Use Q"));
-                    _useW = ModesMenu.Add("laneW", new CheckBox("Use W"));
                     _useE = ModesMenu.Add("laneE", new CheckBox("Use E"));
-                    _useR = ModesMenu.Add("laneR", new CheckBox("Use R", false)); // Default false
-                }
-
-                public static void Initialize()
-                {
-                }
-            }
-
-            public static class LastHit
-            {
-                private static readonly CheckBox _useQ;
-                private static readonly CheckBox _useW;
-                private static readonly CheckBox _useE;
-                private static readonly CheckBox _useR;
-
-                public static bool UseQ
-                {
-                    get { return _useQ.CurrentValue; }
-                }
-
-                public static bool UseW
-                {
-                    get { return _useW.CurrentValue; }
-                }
-
-                public static bool UseE
-                {
-                    get { return _useE.CurrentValue; }
-                }
-
-                public static bool UseR
-                {
-                    get { return _useR.CurrentValue; }
-                }
-
-                static LastHit()
-                {
-                    // Initialize the menu values
-                    ModesMenu.AddGroupLabel("LastHit");
-                    _useQ = ModesMenu.Add("lastQ", new CheckBox("Use Q"));
-                    _useW = ModesMenu.Add("lastW", new CheckBox("Use W"));
-                    _useE = ModesMenu.Add("lastE", new CheckBox("Use E"));
-                    _useR = ModesMenu.Add("lastR", new CheckBox("Use R", false)); // Default false
                 }
 
                 public static void Initialize()

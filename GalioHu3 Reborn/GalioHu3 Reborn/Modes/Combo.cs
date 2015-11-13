@@ -15,16 +15,12 @@ namespace AddonTemplate.Modes
 
         public override void Execute()
         {
-            // TODO: Add combo logic here
-            // See how I used the Settings.UseQ here, this is why I love my way of using
-            // the menu in the Config class!
-            if (Settings.UseQ && Q.IsReady())
+            var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
+            if (target == null) return;
+
+            if (Q.IsReady() && Settings.UseQ && target.IsValidTarget(Q.Range))
             {
-                var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
-                if (target != null)
-                {
-                    Q.Cast(target);
-                }
+                Q.Cast(target);
             }
         }
     }
