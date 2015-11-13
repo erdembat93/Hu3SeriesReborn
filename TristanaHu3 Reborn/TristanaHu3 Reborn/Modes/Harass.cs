@@ -23,7 +23,7 @@ namespace TristanaHu3Reborn.Modes
                 E.Cast(target);
             }
 
-            if (Settings.UseQ && E.IsReady() && target.IsValidTarget(Q.Range) && target.HasBuff("tristanaecharge"))
+            if (Settings.UseQ && target.IsValidTarget(Q.Range) && target.HasBuff("tristanaecharge"))
             {
                 Q.Cast();
             }

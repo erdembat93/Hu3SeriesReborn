@@ -33,7 +33,7 @@ namespace TristanaHu3Reborn
 
         public static class Modes
         {
-            private static readonly Menu ModesMenu, DrawMenu;
+            public static readonly Menu ModesMenu, DrawMenu;
 
             static Modes()
             {
@@ -162,16 +162,10 @@ namespace TristanaHu3Reborn
 
             public static class Misc
             {
-                private static readonly CheckBox _enemies;
                 private static readonly CheckBox _Rint;
                 private static readonly CheckBox _Rgap;
                 private static readonly CheckBox _fleeW;
                 private static readonly CheckBox _fleeR;
-                
-                public static bool Enemies
-                {
-                    get { return _enemies.CurrentValue; }
-                }
 
                 public static bool RInt
                 {
@@ -199,16 +193,16 @@ namespace TristanaHu3Reborn
                     ModesMenu.AddGroupLabel("Exclude E List");
                     foreach (var enemy in EntityManager.Heroes.Enemies)
                     {
-                        _enemies = ModesMenu.Add("dont e" + enemy.ChampionName,
-                            new CheckBox("Don't use E on" + enemy.ChampionName, false));
+                        ModesMenu.Add("dont e" + enemy.ChampionName,
+                            new CheckBox("Don't use E on " + enemy.ChampionName, false));
                     }
 
                     ModesMenu.AddGroupLabel("Interrupt/Gapcloser");
                     _Rint = ModesMenu.Add("rint", new CheckBox("Use R On Interruptable Spell"));
                     _Rgap = ModesMenu.Add("rgap", new CheckBox("Use R On GapCloser"));
                     ModesMenu.AddGroupLabel("Flee");
-                    _Rint = ModesMenu.Add("_fleeW", new CheckBox("Use W to flee"));
-                    _Rgap = ModesMenu.Add("_fleeR", new CheckBox("Use R when you`re low health"));
+                    _fleeW = ModesMenu.Add("_fleeW", new CheckBox("Use W to flee"));
+                    _fleeR = ModesMenu.Add("_fleeR", new CheckBox("Use R when you`re low health"));
                 }
 
                 public static void Initialize()

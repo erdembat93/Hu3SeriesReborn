@@ -68,9 +68,9 @@ namespace TristanaHu3Reborn
             return EntityManager.Turrets.Allies.Where(t => !t.IsDead).Any(d => d.Distance(pos) < 950);
         }
 
-        public static Vector3 GetAfterRPos(this Obj_AI_Base unit)
+        public static Vector3 RPos(this Obj_AI_Base unit)
         {
-            return unit.Position.Extend(Prediction.Position.PredictUnitPosition(unit, 250), 350).To3D();
+            return unit.Position.Extend(Prediction.Position.PredictUnitPosition(unit, 550), 1000).To3D();
         }
     }
 }

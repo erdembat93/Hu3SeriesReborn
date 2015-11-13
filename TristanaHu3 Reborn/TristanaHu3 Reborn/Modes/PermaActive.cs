@@ -1,4 +1,5 @@
-﻿using EloBuddy;
+﻿using System.Drawing.Printing;
+using EloBuddy;
 using EloBuddy.SDK;
 
 using Settings = TristanaHu3Reborn.Config.Modes.Combo;
@@ -30,9 +31,17 @@ namespace TristanaHu3Reborn.Modes
                 }
             }
 
+            if (R.IsReady() && Settings.UseR)
+            {
+                if (target.Health <= (SpellDamage.GetRealDamage(SpellSlot.R, target)) && target.Health > Player.Instance.TotalAttackDamage)
+                {
+                    R.Cast(target);
+                }
+            }
+
             if (R.IsReady() && Settings.UseRTower)
             {
-                if (target.GetAfterRPos().AllyTower())
+                if (target.RPos().AllyTower())
                 {
                     R.Cast(target);
                 }

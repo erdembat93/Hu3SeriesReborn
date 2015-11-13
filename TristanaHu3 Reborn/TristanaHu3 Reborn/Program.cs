@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Enumerations;
 using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Rendering;
-using Color = System.Drawing.Color;
 using Settings = TristanaHu3Reborn.Config.Modes.Draw;
+using Misc = TristanaHu3Reborn.Config.Modes.Misc;
 
 
 namespace TristanaHu3Reborn
@@ -64,7 +63,7 @@ namespace TristanaHu3Reborn
 
         static void Gapcloser_OnGapcloser(AIHeroClient sender, Gapcloser.GapcloserEventArgs e)
         {
-            if (sender.IsEnemy && sender.IsInRange(Player.Instance, SpellManager.R.Range) && Player.Instance.Distance(e.End) < SpellManager.R.Range)
+            if (sender.IsEnemy && sender.IsInRange(Player.Instance, SpellManager.R.Range) && Player.Instance.Distance(e.End) < SpellManager.R.Range && Misc.RGap)
             {
                 SpellManager.R.Cast(sender);
             }
@@ -73,7 +72,7 @@ namespace TristanaHu3Reborn
 
         static void Interrupter_OnInterruptableSpell(Obj_AI_Base sender, Interrupter.InterruptableSpellEventArgs e)
         {
-            if (sender.IsValidTarget(SpellManager.R.Range) && e.DangerLevel >= DangerLevel.High)
+            if (sender.IsValidTarget(SpellManager.R.Range) && e.DangerLevel >= DangerLevel.High && Misc.RInt)
             {
                 SpellManager.R.Cast(sender);
             }
