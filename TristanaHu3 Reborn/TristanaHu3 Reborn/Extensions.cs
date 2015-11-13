@@ -53,11 +53,6 @@ namespace TristanaHu3Reborn
                                            b.Type == BuffType.Snare)).Aggregate(0f, (current, buff) => Math.Max(current, buff.EndTime)) - Game.Time) * 1000;
         }
 
-        public static bool IsPassiveReady(this AIHeroClient target)
-        {
-            return target.IsMe && target.HasBuff("XerathAscended2OnHit");
-        }
-
         public static bool Tower(this Vector3 pos)
         {
             return EntityManager.Turrets.Enemies.Where(t => !t.IsDead).Any(d => d.Distance(pos) < 950);
@@ -65,12 +60,12 @@ namespace TristanaHu3Reborn
 
         public static bool AllyTower(this Vector3 pos)
         {
-            return EntityManager.Turrets.Allies.Where(t => !t.IsDead).Any(d => d.Distance(pos) < 950);
+            return EntityManager.Turrets.Allies.Where(t => !t.IsDead).Any(d => d.Distance(pos) < 750);
         }
 
         public static Vector3 RPos(this Obj_AI_Base unit)
         {
-            return unit.Position.Extend(Prediction.Position.PredictUnitPosition(unit, 550), 1000).To3D();
+            return unit.Position.Extend(Prediction.Position.PredictUnitPosition(unit, 300), 1000).To3D();
         }
     }
 }
