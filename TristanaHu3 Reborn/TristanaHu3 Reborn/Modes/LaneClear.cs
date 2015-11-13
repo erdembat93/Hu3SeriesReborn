@@ -25,9 +25,13 @@ namespace TristanaHu3Reborn.Modes
                 E.Cast(minion);
             }
 
-            if (minion.HasBuff("tristanaecharge") && Q.IsReady())
+            if (minion.IsValidTarget(Q.Range) && Settings.UseQ && Q.IsReady())
             {
-                Q.Cast();
+                Q.IsReady();
+            }
+
+            if (minion.HasBuff("tristanaecharge"))
+            {
                 Orbwalker.ForcedTarget = minion;
             }
         }
