@@ -39,7 +39,7 @@ namespace CaitlynHu3Reborn
         {
             if (sender.IsEnemy && sender.IsVisible && Player.Instance.Distance(e.End) < 100)
             {
-                SpellManager.E.Cast(Player.Instance.Position.Shorten(sender.Position, SpellManager.E.Range));
+                SpellManager.E.Cast(sender.Position);
             }
         }
 
