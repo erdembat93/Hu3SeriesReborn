@@ -19,7 +19,7 @@ namespace AddonTemplate.Modes
 
             if (Settings.UseQ && Q.IsReady() && target.IsValidTarget(Q.Range))
             {
-                Q.Cast();
+                Q.Cast(target);
             }
 
             if (Settings.UseE && E.IsReady() && target.IsValidTarget(E.Range) && Player.Instance.IsFacing(target))
@@ -30,7 +30,7 @@ namespace AddonTemplate.Modes
             if (Settings.UseR && R.IsReady() && target.IsValidTarget(R.Range) &&
                 Player.Instance.ManaPercent <= Settings.ManaR)
             {
-                R.Cast();
+                R.Cast(target);
             }
 
             if (Settings.UseW && W.IsReady() && target.IsValidTarget(W.Range) && target.CountEnemiesInRange(600) <= 2 &&
