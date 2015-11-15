@@ -23,7 +23,7 @@ namespace TristanaHu3Reborn.Modes
                 var stacks = target.GetBuffCount("tristanaecharge");
                 if (stacks >= 1)
                 {
-                    if (target.Health <= (SpellDamage.GetRealDamage(SpellSlot.E, target)*((0.30*stacks) + 1) +
+                    if (target.Health <= (SpellDamage.GetRealDamage(SpellSlot.E, target)*((0.29*stacks) + 1) +
                                           SpellDamage.GetRealDamage(SpellSlot.R, target)))
                     {
                         R.Cast(target);

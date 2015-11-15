@@ -73,11 +73,11 @@ namespace TristanaHu3Reborn
                     damage =
                         new float[]
                         {
-                            60 + (0.50f*Player.Instance.TotalAttackDamage),
-                            70 + (0.65f*Player.Instance.TotalAttackDamage),
-                            80 + (0.80f*Player.Instance.TotalAttackDamage),
-                            90 + (0.95f*Player.Instance.TotalAttackDamage),
-                            100 + (1.1f*Player.Instance.TotalAttackDamage)
+                            60 + (0.5f*Player.Instance.TotalAttackDamage),
+                            70 + (0.6f*Player.Instance.TotalAttackDamage),
+                            80 + (0.8f*Player.Instance.TotalAttackDamage),
+                            90 + (0.9f*Player.Instance.TotalAttackDamage),
+                            100 + (1f*Player.Instance.TotalAttackDamage)
                         }[spellLevel] +
                         0.75f*Player.Instance.TotalMagicalDamage;
                     break;

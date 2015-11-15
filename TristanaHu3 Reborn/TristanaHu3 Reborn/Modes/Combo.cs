@@ -32,7 +32,7 @@ namespace TristanaHu3Reborn.Modes
             }
 
             if (Settings.UseW && W.IsReady() && target.IsValidTarget(1200) && target.CountEnemiesInRange(700) <= 2 &&
-                (target.HealthPercent < (Player.Instance.HealthPercent - 10)) &&
+                (target.HealthPercent < (Player.Instance.HealthPercent - 15)) &&
                 !target.IsInRange(Player.Instance, Player.Instance.AttackRange))
             {
                 var castpos = Player.Instance.Position.Extend(target.Position, W.Range).To3D();

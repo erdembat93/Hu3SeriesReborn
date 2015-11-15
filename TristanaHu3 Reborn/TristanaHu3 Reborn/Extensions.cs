@@ -60,12 +60,12 @@ namespace TristanaHu3Reborn
 
         public static bool AllyTower(this Vector3 pos)
         {
-            return EntityManager.Turrets.Allies.Where(t => !t.IsDead).Any(d => d.Distance(pos) < 750);
+            return EntityManager.Turrets.Allies.Where(t => !t.IsDead).Any(d => d.Distance(pos) < 700);
         }
 
         public static Vector3 RPos(this Obj_AI_Base unit)
         {
-            return unit.Position.Extend(Prediction.Position.PredictUnitPosition(unit, 300), 1000).To3D();
+            return unit.Position.Extend(Prediction.Position.PredictUnitPosition(unit, 300), 600).To3D();
         }
     }
 }
