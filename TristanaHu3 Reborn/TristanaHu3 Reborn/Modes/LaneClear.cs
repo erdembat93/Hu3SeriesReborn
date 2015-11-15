@@ -30,24 +30,21 @@ namespace TristanaHu3Reborn.Modes
                 {
                     Q.IsReady();
                 }
-
-                if (minion.HasBuff("tristanaecharge"))
-                {
-                    Orbwalker.ForcedTarget = minion;
-                }
             }
 
             var tower = EntityManager.Turrets.Enemies.FirstOrDefault(t => !t.IsDead && t.IsValidTarget(E.Range));
-            if (tower == null) return;
-
-            if (tower.IsValidTarget(E.Range) && Settings.UseE && E.IsReady())
+            if (tower != null)
             {
-                E.Cast(tower);
-            }
 
-            if (tower.IsValidTarget(Q.Range) && Settings.UseQ && Q.IsReady())
-            {
-                Q.Cast();
+                if (tower.IsInRange(Player.Instance, E.Range) && Settings.UseE && E.IsReady())
+                {
+                    E.Cast(tower);
+                }
+
+                if (tower.IsInRange(Player.Instance, Q.Range) && Settings.UseQ && Q.IsReady())
+                {
+                    Q.Cast();
+                }
             }
         }
     }
