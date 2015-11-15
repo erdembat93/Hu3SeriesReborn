@@ -57,28 +57,16 @@ namespace CaitlynHu3Reborn
             public static class Combo
             {
                 private static readonly CheckBox _useQ;
-                private static readonly CheckBox _useW;
                 private static readonly CheckBox _useE;
-                private static readonly CheckBox _useR;
 
                 public static bool UseQ
                 {
                     get { return _useQ.CurrentValue; }
                 }
 
-                public static bool UseW
-                {
-                    get { return _useW.CurrentValue; }
-                }
-
                 public static bool UseE
                 {
                     get { return _useE.CurrentValue; }
-                }
-
-                public static bool UseR
-                {
-                    get { return _useR.CurrentValue; }
                 }
 
                 static Combo()
@@ -87,7 +75,6 @@ namespace CaitlynHu3Reborn
                     ModesMenu.AddGroupLabel("Combo");
                     _useQ = ModesMenu.Add("comboQ", new CheckBox("Use Smart Q"));
                     _useE = ModesMenu.Add("comboE", new CheckBox("Use Smart E to safety"));
-                    _useR = ModesMenu.Add("comboR", new CheckBox("Use R", false)); // Default false
                 }
 
                 public static void Initialize()

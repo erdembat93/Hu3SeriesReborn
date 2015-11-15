@@ -64,7 +64,7 @@ namespace EzrealHu3
         {
             if (Misc.GapE && SpellManager.E.IsReady())
             {
-                if (sender.IsEnemy && sender.IsVisible && Player.Instance.Distance(e.End) < 600)
+                if (sender.IsEnemy && sender.IsVisible && Player.Instance.Distance(e.End) < 100)
                 {
                     SpellManager.E.Cast(Player.Instance.Position.Shorten(sender.Position, SpellManager.E.Range));
                 }

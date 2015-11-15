@@ -1,5 +1,6 @@
 ﻿using System;
 using EloBuddy;
+using EloBuddy.SDK;
 using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Rendering;
 using Settings = CaitlynHu3Reborn.Config.Modes.Draw;
@@ -30,6 +31,16 @@ namespace CaitlynHu3Reborn
             DamageIndicator.Initialize(SpellDamage.GetTotalDamage);
 
             Drawing.OnDraw += OnDraw;
+
+            Gapcloser.OnGapcloser += Gapcloser_OnGapcloser;
+        }
+
+        static void Gapcloser_OnGapcloser(AIHeroClient sender, Gapcloser.GapcloserEventArgs e)
+        {
+            if (sender.IsEnemy && sender.IsVisible && Player.Instance.Distance(e.End) < 100)
+            {
+                SpellManager.E.Cast(Player.Instance.Position.Shorten(sender.Position, SpellManager.E.Range));
+            }
         }
 
         private static void OnDraw(EventArgs args)
