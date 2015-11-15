@@ -1,4 +1,5 @@
-﻿using EloBuddy;
+﻿using System;
+using EloBuddy;
 using EloBuddy.SDK;
 
 using Settings = CaitlynHu3Reborn.Config.Modes.Misc;
@@ -12,9 +13,11 @@ namespace CaitlynHu3Reborn.Modes
             return true;
         }
 
+        private int LastW;
+
         public override void Execute()
         {
-            if (Settings.UseQCC)
+            if (Settings.UseQCC && Q.IsReady())
             {
                 var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
 
@@ -28,7 +31,7 @@ namespace CaitlynHu3Reborn.Modes
                 }
             }
 
-            if (Settings.UseWCC)
+            if (Settings.UseWCC && LastW + 500 > Environment.TickCount && W.IsReady())
             {
                 var target = TargetSelector.GetTarget(W.Range, DamageType.Physical);
                 if (target != null)
@@ -37,6 +40,7 @@ namespace CaitlynHu3Reborn.Modes
                         target.HasBuffOfType(BuffType.Knockup))
                     {
                         W.Cast(target);
+                        LastW = Environment.TickCount;
                     }
                 }
             }

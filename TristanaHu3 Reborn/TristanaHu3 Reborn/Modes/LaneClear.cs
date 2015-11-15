@@ -16,7 +16,7 @@ namespace TristanaHu3Reborn.Modes
         public override void Execute()
         {
             var minion =
-                EntityManager.MinionsAndMonsters.EnemyMinions
+                EntityManager.MinionsAndMonsters.GetLaneMinions()
                     .FirstOrDefault(m => m.IsValidTarget(Player.Instance.AttackRange));
             if (minion != null)
             {

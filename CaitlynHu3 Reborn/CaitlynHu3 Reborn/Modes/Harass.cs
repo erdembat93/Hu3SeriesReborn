@@ -14,7 +14,7 @@ namespace CaitlynHu3Reborn.Modes
         public override void Execute()
         {
             var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
-            if (target.HasUndyingBuff() || target.IsZombie || target == null) return;
+            if (target == null) return;
 
             if (Settings.UseQ && Q.IsReady() && target.IsValidTarget(Q.Range))
             {
