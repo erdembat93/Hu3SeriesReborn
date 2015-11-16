@@ -13,10 +13,19 @@ namespace CaitlynHu3Reborn.Modes
             return true;
         }
 
-        private int LastW;
+        private int _lastW;
 
         public override void Execute()
         {
+            var targetAutoAttack = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
+            if (targetAutoAttack != null)
+            {
+                if (targetAutoAttack.HasBuff("caitlynyordletrapinternal"))
+                {
+                    Player.IssueOrder(GameObjectOrder.AttackUnit, targetAutoAttack);
+                }
+            }
+
             if (Settings.UseQCC && Q.IsReady())
             {
                 var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
@@ -31,7 +40,7 @@ namespace CaitlynHu3Reborn.Modes
                 }
             }
 
-            if (Settings.UseWCC && LastW + 500 > Environment.TickCount && W.IsReady())
+            if (Settings.UseWCC && _lastW + 1500 > Environment.TickCount && W.IsReady())
             {
                 var target = TargetSelector.GetTarget(W.Range, DamageType.Physical);
                 if (target != null)
@@ -40,7 +49,7 @@ namespace CaitlynHu3Reborn.Modes
                         target.HasBuffOfType(BuffType.Knockup))
                     {
                         W.Cast(target);
-                        LastW = Environment.TickCount;
+                        _lastW = Environment.TickCount;
                     }
                 }
             }

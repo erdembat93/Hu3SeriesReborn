@@ -18,11 +18,12 @@ namespace CaitlynHu3Reborn.Modes
             var minion =
                 EntityManager.MinionsAndMonsters.GetLaneMinions()
                     .FirstOrDefault(
-                        m => m.IsValidTarget(Q.Range) && m.Health <= SpellDamage.GetRealDamage(SpellSlot.Q, m));
+                        m =>
+                            m.IsValidTarget(Q.Range) && !m.IsInRange(Player.Instance, Player.Instance.AttackRange) &&
+                            (m.Health <= SpellDamage.GetRealDamage(SpellSlot.Q, m)));
             if (minion == null) return;
 
-            if (Q.IsReady() && !minion.IsInRange(Player.Instance, Player.Instance.AttackRange) && Settings.UseQ &&
-                minion.IsValidTarget(Q.Range))
+            if (Q.IsReady() && Settings.UseQ)
             {
                 Q.Cast(minion);
             }

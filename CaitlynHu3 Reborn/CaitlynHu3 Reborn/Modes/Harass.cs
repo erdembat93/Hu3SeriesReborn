@@ -20,6 +20,17 @@ namespace CaitlynHu3Reborn.Modes
             {
                 Q.Cast(target);
             }
+
+            if (Settings.UseE && E.IsReady() && target.IsInRange(Player.Instance, 450) &&
+                target.IsValidTarget(E.Range))
+            {
+                E.Cast(target);
+            }
+
+            if (target.HasBuff("caitlynyordletrapinternal"))
+            {
+                Player.IssueOrder(GameObjectOrder.AttackUnit, target);
+            }
         }
     }
 }

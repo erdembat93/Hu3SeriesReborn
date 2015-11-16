@@ -85,10 +85,16 @@ namespace CaitlynHu3Reborn
             public static class Harass
             {
                 private static readonly CheckBox _useQ;
+                private static readonly CheckBox _useE;
 
                 public static bool UseQ
                 {
                     get { return _useQ.CurrentValue; }
+                }
+
+                public static bool UseE
+                {
+                    get { return _useE.CurrentValue; }
                 }
 
                 static Harass()
@@ -96,6 +102,7 @@ namespace CaitlynHu3Reborn
                     // Initialize the menu values
                     ModesMenu.AddGroupLabel("Harass");
                     _useQ = ModesMenu.Add("harassQ", new CheckBox("Use Q"));
+                    _useE = ModesMenu.Add("harassE", new CheckBox("Use E"));
                 }
 
                 public static void Initialize()
