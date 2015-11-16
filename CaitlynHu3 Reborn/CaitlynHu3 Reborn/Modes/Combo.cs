@@ -1,4 +1,5 @@
-﻿using EloBuddy;
+﻿using System;
+using EloBuddy;
 using EloBuddy.SDK;
 
 using Settings = CaitlynHu3Reborn.Config.Modes.Combo;
@@ -11,6 +12,8 @@ namespace CaitlynHu3Reborn.Modes
         {
             return Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo);
         }
+
+        private int _lastW;
 
         public override void Execute()
         {
@@ -30,9 +33,10 @@ namespace CaitlynHu3Reborn.Modes
                 Q.Cast(target);
             }
 
-            if (W.IsReady() && target.IsValidTarget(W.Range))
+            if (W.IsReady() && target.IsValidTarget(W.Range) && _lastW + 4000 > Environment.TickCount)
             {
                 W.Cast(target);
+                _lastW = Environment.TickCount;
             }
 
             if (Player.Instance.CanAttack)
