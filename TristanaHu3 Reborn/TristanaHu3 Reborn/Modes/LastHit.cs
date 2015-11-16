@@ -13,14 +13,13 @@ namespace TristanaHu3Reborn.Modes
 
         public override void Execute()
         {
-            var minion =
-                EntityManager.MinionsAndMonsters.EnemyMinions
-                    .FirstOrDefault(m => m.IsValidTarget(Player.Instance.AttackRange));
-            if (minion == null) return;
-
-            if (minion.HasBuff("tristanaecharge"))
+            var minionE =
+                EntityManager.MinionsAndMonsters.GetLaneMinions()
+                    .FirstOrDefault(
+                        m => m.IsValidTarget(Player.Instance.AttackRange) && m.GetBuffCount("tristanaecharge") > 0);
+            if (minionE != null)
             {
-                Orbwalker.ForcedTarget = minion;
+                Orbwalker.ForcedTarget = minionE;
             }
         }
     }

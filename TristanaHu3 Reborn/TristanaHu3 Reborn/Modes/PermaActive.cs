@@ -21,7 +21,7 @@ namespace TristanaHu3Reborn.Modes
             if (R.IsReady() && Settings.UseR)
             {
                 var stacks = target.GetBuffCount("tristanaecharge");
-                if (stacks >= 1)
+                if (stacks > 0)
                 {
                     if (target.Health <= (SpellDamage.GetRealDamage(SpellSlot.E, target)*((0.29*stacks) + 1) +
                                           SpellDamage.GetRealDamage(SpellSlot.R, target)))

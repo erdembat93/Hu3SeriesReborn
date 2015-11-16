@@ -30,6 +30,15 @@ namespace TristanaHu3Reborn.Modes
                 {
                     Q.IsReady();
                 }
+
+                var minionE =
+                    EntityManager.MinionsAndMonsters.GetLaneMinions()
+                        .FirstOrDefault(
+                            m => m.IsValidTarget(Player.Instance.AttackRange) && m.GetBuffCount("tristanaecharge") > 0);
+                if (minionE != null)
+                {
+                    Orbwalker.ForcedTarget = minionE;
+                }
             }
 
             var tower = EntityManager.Turrets.Enemies.FirstOrDefault(t => !t.IsDead && t.IsInRange(Player.Instance, 800));
