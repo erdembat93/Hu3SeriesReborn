@@ -32,7 +32,7 @@ namespace TristanaHu3Reborn.Modes
                 }
             }
 
-            var tower = EntityManager.Turrets.Enemies.FirstOrDefault(t => !t.IsDead && t.IsValidTarget(E.Range));
+            var tower = EntityManager.Turrets.Enemies.FirstOrDefault(t => !t.IsDead && t.IsInRange(Player.Instance, 800));
             if (tower != null)
             {
 
