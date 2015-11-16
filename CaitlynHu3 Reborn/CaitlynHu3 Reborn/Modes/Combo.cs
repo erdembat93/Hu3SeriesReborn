@@ -18,7 +18,7 @@ namespace CaitlynHu3Reborn.Modes
             if (target == null) return;
 
             if (Settings.UseE && E.IsReady() && target.IsInRange(Player.Instance, 390) &&
-                target.IsValidTarget(E.Range))
+                target.IsValidTarget(E.Range) && target.IsFacing(Player.Instance))
             {
                 E.Cast(target);
             }
@@ -28,6 +28,11 @@ namespace CaitlynHu3Reborn.Modes
                  target.HasBuffOfType(BuffType.Slow)))
             {
                 Q.Cast(target);
+            }
+
+            if (W.IsReady() && target.IsValidTarget(W.Range))
+            {
+                W.Cast(target);
             }
 
             if (Player.Instance.CanAttack)

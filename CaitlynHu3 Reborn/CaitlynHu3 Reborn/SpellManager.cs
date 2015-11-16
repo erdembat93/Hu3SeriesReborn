@@ -14,7 +14,10 @@ namespace CaitlynHu3Reborn
         static SpellManager()
         {
             Q = new Spell.Skillshot(SpellSlot.Q, 1200, SkillShotType.Linear, 650, 2000, 58);
-            W = new Spell.Skillshot(SpellSlot.W, 790, SkillShotType.Circular, 450, 1400, 35);
+            W = new Spell.Skillshot(SpellSlot.W, 790, SkillShotType.Circular, 450, 1400, 35)
+            {
+                MinimumHitChance = HitChance.High
+            };
             E = new Spell.Skillshot(SpellSlot.E, 950, SkillShotType.Linear, 250, 1600, 80);
             R = new Spell.Targeted(SpellSlot.R, 2000);
         }

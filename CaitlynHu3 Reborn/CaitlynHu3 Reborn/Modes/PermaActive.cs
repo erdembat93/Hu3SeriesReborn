@@ -62,7 +62,7 @@ namespace CaitlynHu3Reborn.Modes
                 var targetR = TargetSelector.GetTarget(SpellManager.R.Range, DamageType.Physical);
                 if (targetR != null)
                 {
-                    if (targetR.IsValidTarget(R.Range))
+                    if (targetR.IsValidTarget(R.Range) && targetR.Health < SpellDamage.GetRealDamage(SpellSlot.R, targetR))
                     {
                         R.Cast(targetR);
                     }
