@@ -60,22 +60,30 @@ namespace CaitlynHu3Reborn
             {
                 case SpellSlot.Q:
 
-                    damage = new float[] { 0, 0, 0, 0, 0 }[spellLevel] + 0.0f * Player.Instance.TotalMagicalDamage;
+                    damage =
+                        new float[]
+                        {
+                            25 + 1.2f*Player.Instance.TotalAttackDamage,
+                            70 + 1.3f*Player.Instance.TotalAttackDamage,
+                            115 + 1.4f*Player.Instance.TotalAttackDamage,
+                            160 + 1.5f*Player.Instance.TotalAttackDamage,
+                            205 + 1.6f*Player.Instance.TotalAttackDamage
+                        }[spellLevel];
                     break;
 
                 case SpellSlot.W:
 
-                    damage = new float[] { 0, 0, 0, 0, 0 }[spellLevel] + 0.0f * Player.Instance.TotalMagicalDamage;
+                    damage = new float[] {0, 0, 0, 0, 0}[spellLevel] + 0.0f*Player.Instance.TotalMagicalDamage;
                     break;
 
                 case SpellSlot.E:
 
-                    damage = new float[] { 0, 0, 0, 0, 0 }[spellLevel] + 0.0f * Player.Instance.TotalMagicalDamage;
+                    damage = new float[] {70, 110, 150, 190, 230}[spellLevel] + 0.8f*Player.Instance.TotalMagicalDamage;
                     break;
 
                 case SpellSlot.R:
 
-                    damage = new float[] { 0, 0, 0 }[spellLevel] + 0.0f * Player.Instance.TotalMagicalDamage;
+                    damage = new float[] { 250, 475, 700 }[spellLevel] + 2.0f * Player.Instance.TotalAttackDamage;
                     break;
             }
 
@@ -84,7 +92,7 @@ namespace CaitlynHu3Reborn
                 return 0;
             }
 
-            return Player.Instance.CalculateDamageOnUnit(target, damageType, damage) - 10;
+            return Player.Instance.CalculateDamageOnUnit(target, damageType, damage) - 30;
         }
     }
 }

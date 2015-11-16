@@ -171,6 +171,8 @@ namespace CaitlynHu3Reborn
                 private static readonly CheckBox _autoA;
                 private static readonly CheckBox _autoQ;
                 private static readonly CheckBox _autoW;
+
+                private static readonly KeyBind _keyR;
                 
                 public static bool UseAA
                 {
@@ -186,6 +188,16 @@ namespace CaitlynHu3Reborn
                 {
                     get { return _autoW.CurrentValue; }
                 }
+
+                public static bool KeyR
+                {
+                    get { return _keyR.CurrentValue; }
+                }
+
+                public static System.Tuple<string,string> WhatKey
+                {
+                    get { return _keyR.KeyStrings; }
+                }
                 
                 static Misc()
                 {
@@ -195,7 +207,9 @@ namespace CaitlynHu3Reborn
                     ModesMenu.AddSeparator(5);
                     _autoQ = ModesMenu.Add("autoQ", new CheckBox("Auto Q if target is CC'ed"));
                     _autoW = ModesMenu.Add("autoW", new CheckBox("Auto W if target is CC'ed"));
-                    
+                    ModesMenu.AddGroupLabel("KS");
+                    ModesMenu.AddLabel("Hold it until it ults", 35);
+                    _keyR = ModesMenu.Add("keyR", new KeyBind("Key to use R when targets are killable",false,  KeyBind.BindTypes.HoldActive, 'Z'));
                 }
 
                 public static void Initialize()
@@ -210,6 +224,7 @@ namespace CaitlynHu3Reborn
                 private static readonly CheckBox _drawW;
                 private static readonly CheckBox _drawE;
                 private static readonly CheckBox _drawR;
+                private static readonly CheckBox _drawRKill;
 
                 private static readonly CheckBox _drawReady;
 
@@ -241,6 +256,11 @@ namespace CaitlynHu3Reborn
                 public static bool DrawReady
                 {
                     get { return _drawReady.CurrentValue; }
+                }
+
+                public static bool DrawKillable
+                {
+                    get { return _drawRKill.CurrentValue; }
                 }
 
 
@@ -293,6 +313,7 @@ namespace CaitlynHu3Reborn
                 {
                     DrawMenu.AddGroupLabel("Draw");
                     _drawReady = DrawMenu.Add("drawReady", new CheckBox("Draw Only If The Spells Are Ready.", false));
+                    _drawRKill = DrawMenu.Add("drawRkill", new CheckBox("Draw if R can kill the target"));
                     DrawMenu.AddSeparator();
                     DrawMenu.AddLabel("Reload is required to aply the changes made in the damage indicator");
                     _drawHealth = DrawMenu.Add("drawHealth", new CheckBox("Draw Damage in HealthBar"));

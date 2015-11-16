@@ -3,8 +3,11 @@ using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Rendering;
-using Settings = CaitlynHu3Reborn.Config.Modes.Draw;
+using SharpDX;
+using SharpDX.Direct3D9;
 
+using Settings = CaitlynHu3Reborn.Config.Modes.Draw;
+using Misc = CaitlynHu3Reborn.Config.Modes.Misc;
 
 namespace CaitlynHu3Reborn
 {
@@ -12,6 +15,7 @@ namespace CaitlynHu3Reborn
     {
         // ReSharper disable once MemberCanBePrivate.Global
         public const string ChampName = "Caitlyn";
+        private static Font _font;
 
         public static void Main(string[] args)
         {
@@ -29,6 +33,16 @@ namespace CaitlynHu3Reborn
             SpellManager.Initialize();
             ModeManager.Initialize();
             DamageIndicator.Initialize(SpellDamage.GetTotalDamage);
+
+            _font = new Font(
+                Drawing.Direct3DDevice,
+                new FontDescription
+                {
+                    FaceName = "Segoi UI",
+                    Height = 22,
+                    OutputPrecision = FontPrecision.Default,
+                    Quality = FontQuality.Default
+                });
 
             Drawing.OnDraw += OnDraw;
 
@@ -63,6 +77,20 @@ namespace CaitlynHu3Reborn
             if (Settings.DrawReady ? SpellManager.R.IsReady() : Settings.DrawR)
             {
                 new Circle { Color = Settings.colorR, BorderWidth = Settings._widthR, Radius = SpellManager.R.Range }.Draw(Player.Instance.Position);
+            }
+
+            if (Settings.DrawKillable)
+            {
+                var target = TargetSelector.GetTarget(SpellManager.R.Range, DamageType.Physical);
+                if (target != null)
+                {
+                    if (target.Health < SpellDamage.GetRealDamage(SpellSlot.R, target) && SpellManager.R.IsReady() &&
+                        target.IsValidTarget(SpellManager.R.Range))
+                    {
+                        var playerPos = Drawing.WorldToScreen(Player.Instance.Position);
+                        _font.DrawText(null, "Target is Killable with R, if you want to Kill him press " + Misc.WhatKey, (int)playerPos[0] - 220, (int)playerPos[1] + 38, Color.Red);
+                    }
+                }
             }
         }
     }

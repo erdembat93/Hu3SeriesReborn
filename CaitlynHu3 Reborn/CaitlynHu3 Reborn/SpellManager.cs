@@ -13,14 +13,31 @@ namespace CaitlynHu3Reborn
 
         static SpellManager()
         {
-            Q = new Spell.Skillshot(SpellSlot.Q, 1230, SkillShotType.Linear, 550, 2000, 60);
-            W = new Spell.Skillshot(SpellSlot.W, 800, SkillShotType.Circular, 350, int.MaxValue, 30);
+            Q = new Spell.Skillshot(SpellSlot.Q, 1200, SkillShotType.Linear, 650, 2000, 58);
+            W = new Spell.Skillshot(SpellSlot.W, 790, SkillShotType.Circular, 450, 1400, 35);
             E = new Spell.Skillshot(SpellSlot.E, 950, SkillShotType.Linear, 250, 1600, 80);
             R = new Spell.Targeted(SpellSlot.R, 2000);
         }
 
         public static void Initialize()
         {
+            Obj_AI_Base.OnLevelUp += Obj_AI_Base_OnLevelUp;
+        }
+
+        static void Obj_AI_Base_OnLevelUp(Obj_AI_Base sender, Obj_AI_BaseLevelUpEventArgs args)
+        {
+            if (sender.IsMe)
+            {
+                if (Player.Instance.Level >= 11 && Player.Instance.Level < 16)
+                {
+                    R = new Spell.Targeted(SpellSlot.R, 2500);
+                }
+
+                if (Player.Instance.Level >= 16)
+                {
+                    R = new Spell.Targeted(SpellSlot.R, 3000);
+                }
+            }
         }
     }
 }

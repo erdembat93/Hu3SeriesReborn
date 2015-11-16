@@ -17,12 +17,15 @@ namespace CaitlynHu3Reborn.Modes
 
         public override void Execute()
         {
-            var targetAutoAttack = TargetSelector.GetTarget(Player.Instance.AttackRange * 2, DamageType.Physical);
-            if (targetAutoAttack != null)
+            if (Player.Instance.CanAttack && Settings.UseAA)
             {
-                if (targetAutoAttack.HasBuff("caitlynyordletrapinternal") && Settings.UseAA)
+                var targetAutoAttack = TargetSelector.GetTarget(Player.Instance.AttackRange * 2, DamageType.Physical);
+                if (targetAutoAttack != null)
                 {
-                    Player.IssueOrder(GameObjectOrder.AttackUnit, targetAutoAttack);
+                    if (targetAutoAttack.HasBuff("caitlynyordletrapinternal"))
+                    {
+                        Player.IssueOrder(GameObjectOrder.AttackUnit, targetAutoAttack);
+                    }
                 }
             }
 
@@ -50,6 +53,18 @@ namespace CaitlynHu3Reborn.Modes
                     {
                         W.Cast(target);
                         _lastW = Environment.TickCount;
+                    }
+                }
+            }
+
+            if (R.IsReady() && Settings.KeyR)
+            {
+                var targetR = TargetSelector.GetTarget(SpellManager.R.Range, DamageType.Physical);
+                if (targetR != null)
+                {
+                    if (targetR.IsValidTarget(R.Range))
+                    {
+                        R.Cast(targetR);
                     }
                 }
             }
