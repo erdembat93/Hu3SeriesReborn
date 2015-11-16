@@ -17,10 +17,10 @@ namespace CaitlynHu3Reborn.Modes
 
         public override void Execute()
         {
-            var targetAutoAttack = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
+            var targetAutoAttack = TargetSelector.GetTarget(Player.Instance.AttackRange * 2, DamageType.Physical);
             if (targetAutoAttack != null)
             {
-                if (targetAutoAttack.HasBuff("caitlynyordletrapinternal"))
+                if (targetAutoAttack.HasBuff("caitlynyordletrapinternal") && Settings.UseAA)
                 {
                     Player.IssueOrder(GameObjectOrder.AttackUnit, targetAutoAttack);
                 }

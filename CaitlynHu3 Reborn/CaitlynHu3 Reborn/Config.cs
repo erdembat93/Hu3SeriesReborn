@@ -113,17 +113,31 @@ namespace CaitlynHu3Reborn
             public static class LaneClear
             {
                 private static readonly CheckBox _useQ;
+                private static readonly Slider _manaLane;
+                private static readonly Slider _minQ;
 
                 public static bool UseQ
                 {
                     get { return _useQ.CurrentValue; }
                 }
 
+                public static int Mana
+                {
+                    get { return _manaLane.CurrentValue; }
+                }
+
+                public static int MinQ
+                {
+                    get { return _minQ.CurrentValue; }
+                }
+
                 static LaneClear()
                 {
                     // Initialize the menu values
                     ModesMenu.AddGroupLabel("LaneClear");
-                    _useQ = ModesMenu.Add("laneQ", new CheckBox("Use Q(Crappy atm)"));
+                    _useQ = ModesMenu.Add("laneQ", new CheckBox("Use Q"));
+                    _manaLane = ModesMenu.Add("manaLane", new Slider("Min mana to use LaneClear", 30));
+                    _minQ = ModesMenu.Add("minQ", new Slider("Min minions to use Q", 4, 1, 6));
                 }
 
                 public static void Initialize()
@@ -154,8 +168,14 @@ namespace CaitlynHu3Reborn
 
             public static class Misc
             {
+                private static readonly CheckBox _autoA;
                 private static readonly CheckBox _autoQ;
                 private static readonly CheckBox _autoW;
+                
+                public static bool UseAA
+                {
+                    get { return _autoA.CurrentValue; }
+                }
 
                 public static bool UseQCC
                 {
@@ -171,8 +191,11 @@ namespace CaitlynHu3Reborn
                 {
                     // Initialize the menu values
                     ModesMenu.AddGroupLabel("Misc");
+                    _autoA = ModesMenu.Add("autoA", new CheckBox("Auto A if target is netted or trapped"));
+                    ModesMenu.AddSeparator(5);
                     _autoQ = ModesMenu.Add("autoQ", new CheckBox("Auto Q if target is CC'ed"));
                     _autoW = ModesMenu.Add("autoW", new CheckBox("Auto W if target is CC'ed"));
+                    
                 }
 
                 public static void Initialize()
