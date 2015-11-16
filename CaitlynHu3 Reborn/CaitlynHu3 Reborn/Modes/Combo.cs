@@ -29,6 +29,13 @@ namespace CaitlynHu3Reborn.Modes
             {
                 Q.Cast(target);
             }
+
+            var targetAutoAttack = TargetSelector.GetTarget(Player.Instance.AttackRange * 2, DamageType.Physical);
+            if (targetAutoAttack == null) return;
+            if (targetAutoAttack.HasBuff("caitlynyordletrapinternal"))
+            {
+                Player.IssueOrder(GameObjectOrder.AttackUnit, targetAutoAttack);
+            }
         }
     }
 }

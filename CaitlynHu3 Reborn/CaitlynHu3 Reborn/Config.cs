@@ -191,7 +191,7 @@ namespace CaitlynHu3Reborn
                 {
                     // Initialize the menu values
                     ModesMenu.AddGroupLabel("Misc");
-                    _autoA = ModesMenu.Add("autoA", new CheckBox("Auto A if target is netted or trapped"));
+                    _autoA = ModesMenu.Add("autoA", new CheckBox("Auto AA if target(Only heroes) is netted or trapped"));
                     ModesMenu.AddSeparator(5);
                     _autoQ = ModesMenu.Add("autoQ", new CheckBox("Auto Q if target is CC'ed"));
                     _autoW = ModesMenu.Add("autoW", new CheckBox("Auto W if target is CC'ed"));
