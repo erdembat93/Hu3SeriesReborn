@@ -21,7 +21,7 @@ namespace CaitlynHu3Reborn.Modes
             if (minions.Length == 0) return;
 
             var farmLocation = EntityManager.MinionsAndMonsters.GetLineFarmLocation(minions, Q.Width, (int) Q.Range);
-            if (farmLocation.HitNumber >= 4 && Settings.UseQ)
+            if (farmLocation.HitNumber >= Settings.MinQ && Settings.UseQ && Settings.Mana <= Player.Instance.ManaPercent)
             {
                 Q.Cast(farmLocation.CastPosition);
             }
